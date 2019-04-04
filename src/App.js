@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import AuthPage from './pages/Auth';
+import Bookings from './pages/Bookings';
+import EventsPage from './pages/Events';
+import Navigation from './components/Navigation';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <>
+        <Navigation />
+        <main style={{ margin: '8rem auto 0', maxWidth: '1020px' }}>
+          <Switch>
+            <Redirect path="/" to="/auth" exact />
+            <Route path="/auth" component={AuthPage} />
+            <Route path="/calendar" component={EventsPage} />
+            <Route path="/book" component={Bookings} />
+          </Switch>
+        </main>
+      </>
     );
   }
 }
