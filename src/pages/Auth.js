@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 class AuthPage extends Component {
@@ -33,10 +34,13 @@ class AuthPage extends Component {
               placeholder="password"
             />
           </FormGroup>
-          <div>
-            <button type="button">Sign Up</button>
-            <button type="submit">Login</button>
-          </div>
+          <ButtonGroup>
+            <FormButton type="submit">Login</FormButton>
+            <RegisterParagraph>
+              Not signed up?
+              <Link to="/register">Register</Link>
+            </RegisterParagraph>
+          </ButtonGroup>
         </LoginForm>
       </LoginPage>
     );
@@ -75,6 +79,32 @@ const TextInput = styled.input`
   border: 1px solid #4f4f4f;
   font-size: inherit;
   padding: 1rem 0.5rem;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const FormButton = styled.button`
+  background: #9fbdef;
+  color: #fff;
+  font-weight: 400;
+  font-size: inherit;
+  text-transform: uppercase;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  border: transparent;
+  cursor: pointer;
+`;
+
+const RegisterParagraph = styled.p`
+  font-size: 1.2rem;
+  a {
+    margin-left: 0.8rem;
+    color: #9fbdef;
+  }
 `;
 
 export default AuthPage;
