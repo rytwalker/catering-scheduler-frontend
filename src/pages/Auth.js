@@ -3,15 +3,49 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 class AuthPage extends Component {
-  state = { email: '', passowrd: '' };
+  state = {
+    email: '',
+    password: '',
+    first_name: '',
+    last_name: '',
+    phone_number: ''
+  };
+
+  handleSubmit = e => {
+    const { email, password, first_name, last_name, phone_number } = this.state;
+    e.preventDefault();
+
+    if (!email.length || !password.length) {
+      return;
+    }
+
+    const requestBody = {
+      query: `
+        mutation {
+          createUser(userInput: {email: "${email}", password: "${password}", first_name: "${first_name}", last_name: "${last_name}", phone_number: "${phone_number}"}) {
+            _id
+            email
+          }
+        }
+      `
+    };
+
+    fetch('http://localhost:5000/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  };
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, first_name, last_name, phone_number } = this.state;
     return (
       <LoginPage>
-        <LoginForm>
+        <LoginForm onSubmit={this.handleSubmit}>
           <FormGroup>
             <FormLabel htmlFor="email">Email:</FormLabel>
             <TextInput
@@ -32,6 +66,39 @@ class AuthPage extends Component {
               onChange={this.handleChange}
               value={password}
               placeholder="password"
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="first_name">First Name:</FormLabel>
+            <TextInput
+              type="text"
+              name="first_name"
+              id="first_name"
+              onChange={this.handleChange}
+              value={first_name}
+              placeholder="First Name"
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="last_name">Last Name:</FormLabel>
+            <TextInput
+              type="text"
+              name="last_name"
+              id="last_name"
+              onChange={this.handleChange}
+              value={last_name}
+              placeholder="Last Name"
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="phone_number">Phone Number:</FormLabel>
+            <TextInput
+              type="text"
+              name="phone_number"
+              id="phone_number"
+              onChange={this.handleChange}
+              value={phone_number}
+              placeholder="330-555-5555"
             />
           </FormGroup>
           <ButtonGroup>
