@@ -102,10 +102,10 @@ class AuthPage extends Component {
             />
           </FormGroup>
           <ButtonGroup>
-            <FormButton type="submit">Login</FormButton>
+            <FormButton type="submit">Register</FormButton>
             <RegisterParagraph>
-              Not signed up?
-              <Link to="/register">Register</Link>
+              Already signed up?
+              <Link to="/register">Log in</Link>
             </RegisterParagraph>
           </ButtonGroup>
         </LoginForm>
