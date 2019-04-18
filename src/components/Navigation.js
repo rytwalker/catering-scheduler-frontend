@@ -1,18 +1,30 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import AuthContext from '../context/auth-context';
+
+/*
+Using render prop will convert to hooks one day soon
+*/
 
 const Navigation = () => {
   return (
-    <StyledNavigation>
-      <Container>
-        <Logo>Hank Brock Catering</Logo>
-        <nav>
-          <NavLink to="/calendar">Calendar</NavLink>
-          <NavLink to="/book">Book With Us</NavLink>
-        </nav>
-      </Container>
-    </StyledNavigation>
+    <AuthContext.Consumer>
+      {context => {
+        return (
+          <StyledNavigation>
+            <Container>
+              <Logo>Hank Brock Catering</Logo>
+              <nav>
+                {!context.token && <NavLink to="/auth">Login/Register</NavLink>}
+                <NavLink to="/calendar">Calendar</NavLink>
+                {context.token && <NavLink to="/book">Book With Us</NavLink>}
+              </nav>
+            </Container>
+          </StyledNavigation>
+        );
+      }}
+    </AuthContext.Consumer>
   );
 };
 

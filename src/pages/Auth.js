@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import AuthContext from '../context/auth-context';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 
 class AuthPage extends Component {
   state = {
-    isRegistering: true
+    isRegistering: false
   };
+
+  static contextType = AuthContext;
 
   toggleForm = () =>
     this.setState({ isRegistering: !this.state.isRegistering });

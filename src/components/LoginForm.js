@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import AuthContext from '../context/auth-context';
 
 class LoginForm extends Component {
   state = {
     email: '',
     password: ''
   };
+
+  static contextType = AuthContext;
 
   handleSubmit = e => {
     const { email, password } = this.state;
@@ -16,24 +18,42 @@ class LoginForm extends Component {
       return;
     }
 
-    // const requestBody = {
-    //   query: `
-    //     mutation {
-    //       createUser(userInput: {email: "${email}", password: "${password}", first_name: "${first_name}", last_name: "${last_name}", phone_number: "${phone_number}"}) {
-    //         _id
-    //         email
-    //       }
-    //     }
-    //   `
-    // };
+    const requestBody = {
+      query: `
+        query {
+          login(email: "${email}", password: "${password}") {
+            user_id
+            token
+            tokenExpiration
+          }
+        }
+      `
+    };
 
-    // fetch('http://localhost:5000/graphql', {
-    //   method: 'POST',
-    //   body: JSON.stringify(requestBody),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // });
+    fetch('http://localhost:5000/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error('Failed');
+        }
+        return res.json();
+      })
+      .then(resData => {
+        if (resData.data.login.token) {
+          this.context.login(
+            resData.data.login.token,
+            resData.data.login.user_id,
+            resData.data.login.tokenExpiration
+          );
+        }
+        console.log(resData);
+      })
+      .catch(err => console.log(err));
   };
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -65,7 +85,7 @@ class LoginForm extends Component {
           />
         </FormGroup>
         <ButtonGroup>
-          <FormButton type="submit">Register</FormButton>
+          <FormButton type="submit">Login</FormButton>
           <RegisterParagraph>
             Not signed up?
             <button onClick={this.props.toggleForm}>Register</button>
