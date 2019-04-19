@@ -18,7 +18,12 @@ const Navigation = () => {
               <nav>
                 {!context.token && <NavLink to="/auth">Login/Register</NavLink>}
                 <NavLink to="/calendar">Calendar</NavLink>
-                {context.token && <NavLink to="/book">Book With Us</NavLink>}
+                {context.token && (
+                  <>
+                    <NavLink to="/book">Book With Us</NavLink>
+                    <button onClick={context.logout}>Log out</button>
+                  </>
+                )}
               </nav>
             </Container>
           </StyledNavigation>
@@ -46,7 +51,8 @@ const Container = styled.div`
   max-width: 1020px;
   margin: 0 auto;
 
-  a {
+  a,
+  button {
     font-size: 1.8rem;
     color: #4f4f4f;
     text-decoration: none;
@@ -56,9 +62,17 @@ const Container = styled.div`
   }
 
   .active,
-  a:hover {
+  a:hover,
+  button:hover {
     color: #9fbdef;
     text-decoration: underline;
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    font-size: inherit;
+    cursor: pointer;
   }
 `;
 
