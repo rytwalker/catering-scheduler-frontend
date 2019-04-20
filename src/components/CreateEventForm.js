@@ -5,42 +5,75 @@ import AuthContext from '../context/auth-context';
 class CreateEventForm extends Component {
   state = {
     title: '',
-    number_of_guests: null,
+    number_of_guests: '',
     location: '',
-    price: null,
+    price: '',
     date: '',
     start_time: '',
-    end_time: '',
-    user_id: null
+    end_time: ''
   };
 
   static contextType = AuthContext;
 
   handleSubmit = e => {
-    const { email, password } = this.state;
+    let {
+      title,
+      number_of_guests,
+      location,
+      price,
+      date,
+      start_time,
+      end_time
+    } = this.state;
     e.preventDefault();
 
-    if (!email.length || !password.length) {
+    if (
+      !title.length ||
+      !number_of_guests.length ||
+      !location.length ||
+      !price.length ||
+      !date.length ||
+      !start_time.length ||
+      !end_time.length
+    ) {
       return;
     }
-
+    const user_id = parseInt(this.context.user_id);
+    price = parseFloat(price);
+    number_of_guests = parseInt(number_of_guests);
+    console.log(typeof number_of_guests);
     const requestBody = {
       query: `
-        query {
-          login(email: "${email}", password: "${password}") {
-            user_id
-            token
-            tokenExpiration
+        mutation {
+          createEvent(eventInput: {title: "${title}", number_of_guests: ${number_of_guests}, location: "${location}", price: ${price}, date: "${date}", start_time: "${start_time}", end_time: "${end_time}", user_id: ${user_id} }) {
+            title
+            number_of_guests
+            location
+            price
+            date
+            start_time
+            end_time
+            user {
+              _id
+              email
+              password
+              first_name
+              last_name
+              phone_number
+            }
           }
         }
       `
     };
 
+    const token = this.context.token;
+
     fetch('http://localhost:5000/graphql', {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
       }
     })
       .then(res => {
@@ -50,16 +83,9 @@ class CreateEventForm extends Component {
         return res.json();
       })
       .then(resData => {
-        if (resData.data.login.token) {
-          this.context.login(
-            resData.data.login.token,
-            resData.data.login.user_id,
-            resData.data.login.tokenExpiration
-          );
-        }
         console.log(resData);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.dir(err));
   };
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -204,16 +230,6 @@ const FormButton = styled.button`
   margin-bottom: 2rem;
   border: transparent;
   cursor: pointer;
-`;
-
-const RegisterParagraph = styled.p`
-  font-size: 1.2rem;
-  button {
-    margin-left: 0.8rem;
-    color: #9fbdef;
-    border: none;
-    cursor: pointer;
-  }
 `;
 
 export default CreateEventForm;
