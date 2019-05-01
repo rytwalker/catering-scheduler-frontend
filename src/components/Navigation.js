@@ -41,6 +41,7 @@ const StyledNavigation = styled.header`
   top: 0;
   right: 0;
   border-bottom: 1px solid #fafafa;
+  z-index: 1000;
 `;
 
 const Container = styled.div`

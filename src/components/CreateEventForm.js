@@ -180,7 +180,8 @@ class CreateEventForm extends Component {
           />
         </FormGroup>
         <ButtonGroup>
-          <FormButton type="submit">Book it</FormButton>
+          <FormButton onClick={this.props.prevStep}>Back</FormButton>
+          <FormButton onClick={this.props.nextStep}>Next</FormButton>
         </ButtonGroup>
       </StyledCreateEventForm>
     );

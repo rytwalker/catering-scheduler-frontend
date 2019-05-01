@@ -6,43 +6,50 @@ const meats = [
     id: 1,
     name: 'BBQ Pork Loin',
     price: '$16.00',
-    type: 'meat'
+    type: 'meat',
+    tier: 1
   },
   {
     id: 2,
     name: 'Smoked Bone-In Chicken Thighs',
     price: '$16.00',
-    type: 'meat'
+    type: 'meat',
+    tier: 1
   },
   {
     id: 3,
     name: 'Boneless Chicken Breasts',
     price: '$16.00',
-    type: 'meat'
+    type: 'meat',
+    tier: 1
   },
   {
     id: 4,
     name: 'Angus Top Round Beef',
     price: '$16.00',
-    type: 'meat'
+    type: 'meat',
+    tier: 2
   },
   {
     id: 5,
     name: 'Smoked Boneless Turkey Breast',
     price: '$16.00',
-    type: 'meat'
+    type: 'meat',
+    tier: 2
   },
   {
     id: 6,
     name: 'BBQ Babyback Ribs',
     price: '$16.00',
-    type: 'meat'
+    type: 'meat',
+    tier: 2
   },
   {
     id: 7,
     name: 'French Cut Lamb Ribs',
     price: '$16.00',
-    type: 'meat'
+    type: 'meat',
+    tier: 3
   }
 ];
 
@@ -120,6 +127,7 @@ class Menu extends Component {
         <ItemTypeSection>
           <ItemHeader>
             <ItemHeading>Select 3 Sides</ItemHeading>
+            <p>Additional sides can be added for $1.00 per guest.</p>
           </ItemHeader>
           <ItemCards>
             {sides.map(side => (
@@ -194,13 +202,19 @@ const ItemCards = styled.div`
 `;
 
 const ItemCard = styled.div`
-  background: #4f4f4f;
-  color: #fff;
+  color: #4f4f4f;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   /* width: 30%; */
   height: 250px;
   cursor: pointer;
   text-align: center;
   padding: 1rem;
+  transition: all 0.2s;
+  &:hover {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    transform: translate3d(0, -2px, 0);
+  }
   h3 {
     font-size: 2rem;
   }
@@ -212,7 +226,7 @@ const ItemCard = styled.div`
 
 const ItemLogo = styled.div`
   color: #9fbdef;
-  background: #fff;
+  background: #4f4f4f;
   height: 100px;
   width: 100px;
   margin: 2rem auto;

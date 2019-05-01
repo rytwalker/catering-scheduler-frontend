@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Menu from '../components/Menu';
 import MenuSidebar from '../components/MenuSidebar';
+import EventCalendar from '../components/EventCalendar';
+import CreateEventForm from '../components/CreateEventForm';
 
 class Events extends Component {
   state = {
+    step: 1,
+    totalPrice: 0,
+    gratuity: 0.18,
+    pricePerPlate: 16.0,
+    priceTier: 1,
     meats: [],
     sides: [],
     salads: [],
@@ -25,6 +32,33 @@ class Events extends Component {
     }
   };
 
+  nextStep = () => {
+    let { step } = this.state;
+    this.setState({ step: step + 1 });
+  };
+  prevStep = () => {
+    let { step } = this.state;
+    this.setState({ step: step - 1 });
+  };
+
+  updateGuestNumber = number => {
+    this.setState(
+      {
+        event: { ...this.state.event, guests: parseInt(number) }
+      },
+      () => this.calculateTotalPrice()
+    );
+  };
+
+  calculateTotalPrice = () => {
+    const { totalPrice, gratuity, pricePerPlate, event } = this.state;
+    let subTotal = pricePerPlate * event.guests;
+    let newTotal = subTotal + subTotal * gratuity;
+    if (newTotal !== totalPrice) {
+      this.setState({ totalPrice: newTotal });
+    }
+  };
+
   toggleItemInState = (item, collection) => {
     const maxItems = { meat: 2, side: 3, salad: 2, bread: 2 };
     let maxLength = maxItems[item.type];
@@ -41,6 +75,26 @@ class Events extends Component {
       this.setState({ [collection]: [...itemCollection, item.name] });
     }
   };
+
+  updatePricePerPlate = () => {
+    const { priceTier } = this.state;
+    if (priceTier === 1) {
+      this.setState({ pricePerPlate: 16.0 });
+    } else if (priceTier === 2) {
+      this.setState({ pricePerPlate: 17.0 });
+    } else if (priceTier === 3) {
+      this.setState({ pricePerPlate: 18.0 });
+    } else if (priceTier === 4) {
+      this.setState({ pricePerPlate: 18.5 });
+    }
+  };
+
+  // updatePriceTier = item => {
+  //   const { priceTier } = this.state;
+  //   if (item.type === 'meat') {
+  //     if (item.tier === 1)
+  //   }
+  // }
 
   handleItemSelection = item => {
     switch (item.type) {
@@ -59,20 +113,43 @@ class Events extends Component {
       default:
         break;
     }
+    this.calculateTotalPrice();
   };
   render() {
-    const { meats, sides, salads, breads } = this.state;
-    return (
-      <MenuContainer>
-        <Menu handleItemSelection={this.handleItemSelection} />
-        <MenuSidebar
-          meats={meats}
-          sides={sides}
-          salads={salads}
-          breads={breads}
-        />
-      </MenuContainer>
-    );
+    const {
+      meats,
+      sides,
+      salads,
+      breads,
+      totalPrice,
+      event,
+      step
+    } = this.state;
+    switch (step) {
+      case 1:
+        return <EventCalendar nextStep={this.nextStep} />;
+      case 2:
+        return (
+          <CreateEventForm nextStep={this.nextStep} prevStep={this.prevStep} />
+        );
+      case 3:
+        return (
+          <MenuContainer>
+            <Menu handleItemSelection={this.handleItemSelection} />
+            <MenuSidebar
+              meats={meats}
+              sides={sides}
+              salads={salads}
+              breads={breads}
+              totalPrice={totalPrice}
+              guests={event.guests}
+              updateGuestNumber={this.updateGuestNumber}
+            />
+          </MenuContainer>
+        );
+      default:
+        break;
+    }
   }
 }
 
