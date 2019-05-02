@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Menu from '../components/Menu';
 import MenuSidebar from '../components/MenuSidebar';
 import EventCalendar from '../components/EventCalendar';
-import CreateEventForm from '../components/CreateEventForm';
+import EventContactForm from '../components/EventContactForm';
 
 class Events extends Component {
   state = {
@@ -18,17 +18,45 @@ class Events extends Component {
     breads: [],
     user: {
       email: 'rytwalker@gmail.com',
-      name: 'Ryan Walker',
+      first_name: 'Ryan',
+      last_name: 'Walker',
       phone: '+13305401036'
     },
     event: {
-      name: "Ryan's Bash",
+      title: "Ryan's Bash",
       location: 'Boardman Park',
       address: '123 Street Lane',
       city: 'Boardman',
       state: 'Ohio',
       zipcode: 44512,
-      guests: 100
+      guests: 100,
+      date: '2019-05-10',
+      start_time: '17:00:00',
+      end_time: '20:00:00'
+    }
+  };
+
+  handleChange = input => e => {
+    // this.setState({ [input]: e.target.value });
+    let splitInput = input.split('.');
+    let { event, user } = this.state;
+    let currentObject;
+
+    if (splitInput[0] === 'event') {
+      currentObject = event;
+    } else if (splitInput[0] === 'user') {
+      currentObject = user;
+    }
+
+    if (splitInput.length === 2) {
+      this.setState({
+        [splitInput[0]]: {
+          ...currentObject,
+          [splitInput[1]]: e.target.value
+        }
+      });
+    } else if (splitInput.length === 1) {
+      this.setState({ [splitInput[0]]: e.target.value });
     }
   };
 
@@ -123,14 +151,26 @@ class Events extends Component {
       breads,
       totalPrice,
       event,
-      step
+      step,
+      user
     } = this.state;
     switch (step) {
       case 1:
-        return <EventCalendar nextStep={this.nextStep} />;
+        return (
+          <EventCalendar
+            nextStep={this.nextStep}
+            handleChange={this.handleChange}
+            event={event}
+          />
+        );
       case 2:
         return (
-          <CreateEventForm nextStep={this.nextStep} prevStep={this.prevStep} />
+          <EventContactForm
+            handleChange={this.handleChange}
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            user={user}
+          />
         );
       case 3:
         return (

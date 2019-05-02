@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CreateEventForm from '../components/CreateEventForm';
+// import CreateEventForm from '../components/CreateEventForm';
 
 class Bookings extends Component {
   state = {};
@@ -7,7 +7,7 @@ class Bookings extends Component {
     return (
       <div>
         <h1>Book an Event With Us</h1>
-        <CreateEventForm />
+        {/* <CreateEventForm /> */}
       </div>
     );
   }

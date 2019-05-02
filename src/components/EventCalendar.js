@@ -5,7 +5,7 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import events from '../data/events';
 import Modal from './Modal';
-import CreateEventForm from './CreateEventForm';
+import EventDetailsForm from './EventDetailsForm';
 
 const upcomingEvents = [...events];
 
@@ -44,6 +44,8 @@ class EventCalendar extends Component {
 
   handleSelect = ({ start }) => {
     console.log(new Date(start).toISOString().split('T')[0]);
+    // let date = new Date(start).toISOString().split('T')[0];
+    // this.props.handleChange('event.date')(date);
     this.setState({ toggle: true });
   };
 
@@ -61,7 +63,11 @@ class EventCalendar extends Component {
         />
         {this.state.toggle && (
           <Modal>
-            <CreateEventForm />
+            <EventDetailsForm
+              handleChange={this.props.handleChange}
+              event={this.props.event}
+              nextStep={this.props.nextStep}
+            />
           </Modal>
         )}
         <button onClick={this.continue}>Next</button>
