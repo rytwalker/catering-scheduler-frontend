@@ -95,7 +95,6 @@ class CreateEventForm extends Component {
       title,
       number_of_guests,
       location,
-      price,
       date,
       start_time,
       end_time
@@ -113,17 +112,7 @@ class CreateEventForm extends Component {
             placeholder="Graduation Party"
           />
         </FormGroup>
-        <FormGroup>
-          <FormLabel htmlFor="number_of_guests">Guests:</FormLabel>
-          <TextInput
-            type="number"
-            name="number_of_guests"
-            id="number_of_guests"
-            onChange={this.handleChange}
-            value={number_of_guests}
-            placeholder="100"
-          />
-        </FormGroup>
+
         <FormGroup>
           <FormLabel htmlFor="location">Location:</FormLabel>
           <TextInput
@@ -132,55 +121,102 @@ class CreateEventForm extends Component {
             id="location"
             onChange={this.handleChange}
             value={location}
-            placeholder="Boardman Park 123 Green Ave. Boardman, Ohio 44512"
+            placeholder="Boardman Park"
           />
         </FormGroup>
         <FormGroup>
-          <FormLabel htmlFor="price">Price:</FormLabel>
+          <FormLabel htmlFor="location">Address:</FormLabel>
           <TextInput
-            type="number"
-            name="price"
-            id="price"
+            type="text"
+            name="location"
+            id="location"
             onChange={this.handleChange}
-            value={price}
-            placeholder="$200.50"
+            value={location}
+            placeholder="123 Green Ave."
           />
         </FormGroup>
-        <FormGroup>
-          <FormLabel htmlFor="date">Date:</FormLabel>
-          <TextInput
-            type="date"
-            name="date"
-            id="date"
-            onChange={this.handleChange}
-            value={date}
-            // placeholder="$200.50"
-          />
-        </FormGroup>
-        <FormGroup>
-          <FormLabel htmlFor="start_time">Start Time:</FormLabel>
-          <TextInput
-            type="time"
-            name="start_time"
-            id="start_time"
-            onChange={this.handleChange}
-            value={start_time}
-            placeholder="7:00pm"
-          />
-        </FormGroup>
-        <FormGroup>
-          <FormLabel htmlFor="end_time">End Time:</FormLabel>
-          <TextInput
-            type="time"
-            name="end_time"
-            id="end_time"
-            onChange={this.handleChange}
-            value={end_time}
-            placeholder="7:00pm"
-          />
-        </FormGroup>
+        <LocationFormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="location">City:</FormLabel>
+            <TextInput
+              type="text"
+              name="location"
+              id="location"
+              onChange={this.handleChange}
+              value={location}
+              placeholder="Boardman"
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="location">State:</FormLabel>
+            <TextInput
+              type="text"
+              name="location"
+              id="location"
+              onChange={this.handleChange}
+              value={location}
+              placeholder="Ohio"
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="location">Zip:</FormLabel>
+            <TextInput
+              type="text"
+              name="location"
+              id="location"
+              onChange={this.handleChange}
+              value={location}
+              placeholder="44512"
+            />
+          </FormGroup>
+        </LocationFormGroup>
+        <DateFormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="date">Date:</FormLabel>
+            <TextInput
+              type="date"
+              name="date"
+              id="date"
+              onChange={this.handleChange}
+              value={date}
+              // placeholder="$200.50"
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="start_time">Start Time:</FormLabel>
+            <TextInput
+              type="time"
+              name="start_time"
+              id="start_time"
+              onChange={this.handleChange}
+              value={start_time}
+              placeholder="7:00pm"
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="end_time">End Time:</FormLabel>
+            <TextInput
+              type="time"
+              name="end_time"
+              id="end_time"
+              onChange={this.handleChange}
+              value={end_time}
+              placeholder="7:00pm"
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel htmlFor="number_of_guests">Guests:</FormLabel>
+            <TextInput
+              type="number"
+              name="number_of_guests"
+              id="number_of_guests"
+              onChange={this.handleChange}
+              value={number_of_guests}
+              placeholder="100"
+            />
+          </FormGroup>
+        </DateFormGroup>
         <ButtonGroup>
-          <FormButton onClick={this.props.prevStep}>Back</FormButton>
           <FormButton onClick={this.props.nextStep}>Next</FormButton>
         </ButtonGroup>
       </StyledCreateEventForm>
@@ -189,17 +225,30 @@ class CreateEventForm extends Component {
 }
 
 const StyledCreateEventForm = styled.form`
-  width: 800px;
+  /* width: 800px; */
   background: #fff;
   border: 1px solid #fafafa;
   border-radius: 5px;
   padding: 3rem;
+  overflow: scroll;
 `;
 
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+`;
+
+const LocationFormGroup = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-column-gap: 2rem;
+`;
+
+const DateFormGroup = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-column-gap: 2rem;
 `;
 
 const FormLabel = styled.label`
