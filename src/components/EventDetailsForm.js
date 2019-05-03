@@ -1,9 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
+import {
+  FauxForm,
+  FormGroup,
+  FormLabel,
+  TextInput,
+  ButtonGroup,
+  FormButton,
+  LocationFormGroup,
+  DateFormGroup,
+  StepHeading
+} from 'elements';
 
 function EventDetailsForm({ event, handleChange, nextStep }) {
   return (
-    <StyledEventDetailsForm>
+    <FauxForm>
       <StepHeading>
         Step 1 (Continued): <span>Fill out event details</span>
       </StepHeading>
@@ -124,75 +134,8 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
       <ButtonGroup>
         <FormButton onClick={nextStep}>Next</FormButton>
       </ButtonGroup>
-    </StyledEventDetailsForm>
+    </FauxForm>
   );
 }
-
-const StyledEventDetailsForm = styled.div`
-  /* width: 800px; */
-  background: #fff;
-  border: 1px solid #fafafa;
-  border-radius: 5px;
-  padding: 3rem;
-`;
-
-const StepHeading = styled.h2`
-  font-size: 2.4rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin: 1rem 0 2rem 0;
-  span {
-    font-weight: 400;
-  }
-`;
-
-const FormGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
-`;
-
-const LocationFormGroup = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-column-gap: 2rem;
-`;
-
-const DateFormGroup = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  grid-column-gap: 2rem;
-`;
-
-const FormLabel = styled.label`
-  font-weight: 400;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-`;
-
-const TextInput = styled.input`
-  border-radius: 5px;
-  border: 1px solid #4f4f4f;
-  font-size: inherit;
-  padding: 1rem 0.5rem;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const FormButton = styled.button`
-  background: #9fbdef;
-  color: #fff;
-  font-weight: 400;
-  font-size: inherit;
-  text-transform: uppercase;
-  padding: 1rem;
-  border-radius: 5px;
-  margin-bottom: 2rem;
-  border: transparent;
-  cursor: pointer;
-`;
 
 export default EventDetailsForm;

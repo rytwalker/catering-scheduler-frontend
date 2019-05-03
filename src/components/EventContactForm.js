@@ -1,9 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
+import {
+  FauxForm,
+  FormGroup,
+  FormLabel,
+  TextInput,
+  ButtonGroup,
+  FormButton
+} from 'elements';
 
 function EventContactForm({ handleChange, nextStep, prevStep, user }) {
   return (
-    <StyledEventContactForm>
+    <FauxForm>
       <FormGroup>
         <FormLabel htmlFor="first_name">First Name:</FormLabel>
         <TextInput
@@ -54,54 +61,8 @@ function EventContactForm({ handleChange, nextStep, prevStep, user }) {
         <FormButton onClick={prevStep}>Back</FormButton>
         <FormButton onClick={nextStep}>Next</FormButton>
       </ButtonGroup>
-    </StyledEventContactForm>
+    </FauxForm>
   );
 }
-
-const StyledEventContactForm = styled.div`
-  /* width: 800px; */
-  background: #fff;
-  border: 1px solid #fafafa;
-  border-radius: 5px;
-  padding: 3rem;
-  overflow: scroll;
-`;
-
-const FormGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
-`;
-
-const FormLabel = styled.label`
-  font-weight: 400;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-`;
-
-const TextInput = styled.input`
-  border-radius: 5px;
-  border: 1px solid #4f4f4f;
-  font-size: inherit;
-  padding: 1rem 0.5rem;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const FormButton = styled.button`
-  background: #9fbdef;
-  color: #fff;
-  font-weight: 400;
-  font-size: inherit;
-  text-transform: uppercase;
-  padding: 1rem;
-  border-radius: 5px;
-  margin-bottom: 2rem;
-  border: transparent;
-  cursor: pointer;
-`;
 
 export default EventContactForm;

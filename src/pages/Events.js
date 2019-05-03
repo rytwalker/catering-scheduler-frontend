@@ -8,7 +8,7 @@ import EventConfirmForm from '../components/EventConfirmForm';
 
 class Events extends Component {
   state = {
-    step: 3,
+    step: 2,
     totalPrice: 0,
     gratuity: 0.18,
     pricePerPlate: 16.0,
@@ -229,12 +229,10 @@ class Events extends Component {
 }
 
 const MenuContainer = styled.div`
-  /* display: flex; */
   display: grid;
   grid-template-columns: 1fr calc(30vw - 5rem);
   grid-column-gap: 5rem;
   position: relative;
-  /* border: 1px solid black; */
 `;
 
 const StepHeading = styled.h2`

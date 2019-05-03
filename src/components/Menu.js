@@ -106,6 +106,7 @@ class Menu extends Component {
   render() {
     return (
       <StyledMenu>
+        <button onClick={this.props.prevStep}>Back</button>
         <ItemTypeSection>
           <ItemHeader>
             <ItemHeading>Select 2 Meats</ItemHeading>

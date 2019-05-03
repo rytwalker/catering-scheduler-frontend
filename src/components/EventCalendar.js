@@ -70,7 +70,6 @@ class EventCalendar extends Component {
             />
           </Modal>
         )}
-        <button onClick={this.continue}>Next</button>
       </Container>
     );
   }

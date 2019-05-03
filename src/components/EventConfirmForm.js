@@ -180,6 +180,9 @@ function EventDetailsForm({ event, handleChange, nextStep, prevStep, user }) {
           defaultValue={user.phone}
         />
       </FormGroup>
+      <SectionHeading>
+        Menu <button>{'(edit)'}</button>
+      </SectionHeading>
       <ButtonGroup>
         <FormButton onClick={prevStep}>Back</FormButton>
       </ButtonGroup>
@@ -193,6 +196,7 @@ const StyledEventDetailsForm = styled.div`
   border: 1px solid #fafafa;
   border-radius: 5px;
   padding: 3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `;
 
 const SectionHeading = styled.h3`
@@ -240,6 +244,8 @@ const TextInput = styled.input`
   border-bottom: 1px solid #4f4f4f;
   font-size: inherit;
   padding: 1rem 0.5rem;
+  font-family: inherit;
+  font-weight: 700;
 `;
 
 const ButtonGroup = styled.div`

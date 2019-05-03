@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Portal from './Portal';
+import { Portal } from 'utilities';
 
 const Modal = ({ children }) => {
   return (
@@ -39,7 +39,7 @@ const ModalCard = styled.div`
   @media (min-width: 900px) {
     margin-top: -25px;
     min-height: 0;
-    // height: 600px;
+    /* // height: 600px; */
     position: fixed;
     box-shadow: 0 5px 28px -5px rgba(0, 0, 0, 0.5);
     overflow: hidden;
