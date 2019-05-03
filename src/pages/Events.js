@@ -4,10 +4,11 @@ import Menu from '../components/Menu';
 import MenuSidebar from '../components/MenuSidebar';
 import EventCalendar from '../components/EventCalendar';
 import EventContactForm from '../components/EventContactForm';
+import EventConfirmForm from '../components/EventConfirmForm';
 
 class Events extends Component {
   state = {
-    step: 1,
+    step: 3,
     totalPrice: 0,
     gratuity: 0.18,
     pricePerPlate: 16.0,
@@ -157,35 +158,69 @@ class Events extends Component {
     switch (step) {
       case 1:
         return (
-          <EventCalendar
-            nextStep={this.nextStep}
-            handleChange={this.handleChange}
-            event={event}
-          />
+          <>
+            <StepHeading>
+              Step 1: <span>Select A date</span>
+            </StepHeading>
+            <EventCalendar
+              nextStep={this.nextStep}
+              handleChange={this.handleChange}
+              event={event}
+            />
+          </>
         );
       case 2:
         return (
-          <EventContactForm
-            handleChange={this.handleChange}
-            nextStep={this.nextStep}
-            prevStep={this.prevStep}
-            user={user}
-          />
+          <>
+            <StepHeading>
+              Step 2: <span>Tell us about you</span>
+            </StepHeading>
+            <EventContactForm
+              handleChange={this.handleChange}
+              nextStep={this.nextStep}
+              prevStep={this.prevStep}
+              user={user}
+            />
+          </>
         );
       case 3:
         return (
-          <MenuContainer>
-            <Menu handleItemSelection={this.handleItemSelection} />
-            <MenuSidebar
-              meats={meats}
-              sides={sides}
-              salads={salads}
-              breads={breads}
-              totalPrice={totalPrice}
-              guests={event.guests}
-              updateGuestNumber={this.updateGuestNumber}
+          <>
+            <StepHeading>
+              Step 3: <span>Create your menu</span>
+            </StepHeading>
+            <MenuContainer>
+              <Menu
+                handleItemSelection={this.handleItemSelection}
+                prevStep={this.prevStep}
+              />
+              <MenuSidebar
+                meats={meats}
+                sides={sides}
+                salads={salads}
+                breads={breads}
+                totalPrice={totalPrice}
+                guests={event.guests}
+                updateGuestNumber={this.updateGuestNumber}
+                nextStep={this.nextStep}
+              />
+            </MenuContainer>
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <StepHeading>
+              Step 4: <span>Confirm Your Event Details</span>
+            </StepHeading>
+            <EventConfirmForm
+              handleChange={this.handleChange}
+              nextStep={this.nextStep}
+              prevStep={this.prevStep}
+              user={user}
+              event={event}
             />
-          </MenuContainer>
+          </>
         );
       default:
         break;
@@ -196,9 +231,20 @@ class Events extends Component {
 const MenuContainer = styled.div`
   /* display: flex; */
   display: grid;
-  grid-template-columns: 60% 1fr;
+  grid-template-columns: 1fr calc(30vw - 5rem);
   grid-column-gap: 5rem;
   position: relative;
+  /* border: 1px solid black; */
+`;
+
+const StepHeading = styled.h2`
+  font-size: 3.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 2rem;
+  span {
+    font-weight: 400;
+  }
 `;
 
 export default Events;

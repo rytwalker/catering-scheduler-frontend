@@ -1,21 +1,22 @@
 import React from 'react';
-// import { useTransition, animated } from 'react-spring';
 import styled from 'styled-components';
 import Portal from './Portal';
 
-const Modal = ({ children, on, toggle }) => {
+const Modal = ({ children }) => {
   return (
     <Portal>
       <ModalWrapper>
         <ModalCard>
-          <CloseButton onClick={toggle}>X</CloseButton>
+          <CloseButton>X</CloseButton>
           <div>{children}</div>
         </ModalCard>
-        <Background onClick={toggle} />
+        <Background />
       </ModalWrapper>
     </Portal>
   );
 };
+
+export default Modal;
 
 const ModalWrapper = styled.div`
   position: absolute;
@@ -29,7 +30,6 @@ const ModalWrapper = styled.div`
 `;
 
 const ModalCard = styled.div`
-  ${'' /* position: relative; */}
   background: #fafafa;
   max-width: 900px;
   width: 100%;
@@ -39,7 +39,7 @@ const ModalCard = styled.div`
   @media (min-width: 900px) {
     margin-top: -25px;
     min-height: 0;
-    height: 500px;
+    // height: 600px;
     position: fixed;
     box-shadow: 0 5px 28px -5px rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -72,5 +72,3 @@ const Background = styled.div`
   top: 0;
   background: rgba(250, 250, 250, 0.6);
 `;
-
-export default Modal;

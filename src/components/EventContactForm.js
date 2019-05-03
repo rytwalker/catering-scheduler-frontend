@@ -73,18 +73,6 @@ const FormGroup = styled.div`
   margin-bottom: 2rem;
 `;
 
-const LocationFormGroup = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  grid-column-gap: 2rem;
-`;
-
-const DateFormGroup = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  grid-column-gap: 2rem;
-`;
-
 const FormLabel = styled.label`
   font-weight: 400;
   text-transform: uppercase;

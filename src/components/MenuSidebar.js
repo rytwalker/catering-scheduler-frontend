@@ -55,7 +55,7 @@ class MenuSidebar extends Component {
               onBlur={this.handleGuestUpdate}
             />
           </FormGroup>
-          <SubmitButton>
+          <SubmitButton onClick={this.props.nextStep}>
             Confirm Party{' '}
             <span role="img" aria-label="party">
               🎉
@@ -68,20 +68,14 @@ class MenuSidebar extends Component {
 }
 
 const Sidebar = styled.div`
-  /* width: 25%; */
-  background: #fff;
-  padding: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: calc(30vw - 5rem);
   position: relative;
-  min-height: 80vh;
-  max-height: 110vh;
-  /* position: fixed; */
-  /* right: 0; */
+
   .container {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: fixed;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background: #fff;
   }
 `;
 

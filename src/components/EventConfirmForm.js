@@ -1,77 +1,81 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function EventDetailsForm({ event, handleChange, nextStep }) {
+function EventDetailsForm({ event, handleChange, nextStep, prevStep, user }) {
   return (
     <StyledEventDetailsForm>
-      <StepHeading>
-        Step 1 (Continued): <span>Fill out event details</span>
-      </StepHeading>
+      <SectionHeading>
+        Event Details <button>{'(edit)'}</button>
+      </SectionHeading>
       <FormGroup>
         <FormLabel htmlFor="title">Event Name:</FormLabel>
         <TextInput
+          disabled
           type="text"
           name="title"
           id="title"
-          onChange={handleChange('event.title')}
           defaultValue={event.title}
-          placeholder="Graduation Party"
         />
       </FormGroup>
       <FormGroup>
         <FormLabel htmlFor="location">Location:</FormLabel>
         <TextInput
+          disabled
           type="text"
           name="location"
           id="location"
           onChange={handleChange('event.location')}
           defaultValue={event.location}
-          placeholder="Boardman Park"
+          //   placeholder="Boardman Park"
         />
       </FormGroup>
       <FormGroup>
         <FormLabel htmlFor="address">Address:</FormLabel>
         <TextInput
+          disabled
           type="text"
           name="address"
           id="address"
           onChange={handleChange('event.address')}
           defaultValue={event.address}
-          placeholder="123 Green Ave."
+          //   placeholder="123 Green Ave."
         />
       </FormGroup>
       <LocationFormGroup>
         <FormGroup>
           <FormLabel htmlFor="city">City:</FormLabel>
           <TextInput
+            disabled
             type="text"
             name="city"
             id="city"
             onChange={handleChange('event.city')}
             defaultValue={event.city}
-            placeholder="Boardman"
+            // placeholder="Boardman"
           />
         </FormGroup>
         <FormGroup>
           <FormLabel htmlFor="state">State:</FormLabel>
           <TextInput
+            disabled
             type="text"
             name="state"
             id="state"
             onChange={handleChange('event.state')}
             defaultValue={event.state}
-            placeholder="Ohio"
+            // placeholder="Ohio"
           />
         </FormGroup>
         <FormGroup>
           <FormLabel htmlFor="zipcode">Zip:</FormLabel>
           <TextInput
+            disabled
             type="text"
             name="zipcode"
             id="zipcode"
             onChange={handleChange('event.zipcode')}
             defaultValue={event.zipcode}
-            placeholder="44512"
+            // placeholder="44512"
           />
         </FormGroup>
       </LocationFormGroup>
@@ -79,6 +83,7 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
         <FormGroup>
           <FormLabel htmlFor="date">Date:</FormLabel>
           <TextInput
+            disabled
             type="date"
             name="date"
             id="date"
@@ -90,39 +95,93 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
         <FormGroup>
           <FormLabel htmlFor="start_time">Start Time:</FormLabel>
           <TextInput
+            disabled
             type="time"
             name="start_time"
             id="start_time"
             onChange={handleChange('event.start_time')}
             defaultValue={event.start_time}
-            placeholder="7:00pm"
+            // placeholder="7:00pm"
           />
         </FormGroup>
         <FormGroup>
           <FormLabel htmlFor="end_time">End Time:</FormLabel>
           <TextInput
+            disabled
             type="time"
             name="end_time"
             id="end_time"
             onChange={handleChange('event.end_time')}
             defaultValue={event.end_time}
-            placeholder="7:00pm"
+            // placeholder="7:00pm"
           />
         </FormGroup>
         <FormGroup>
           <FormLabel htmlFor="number_of_guests">Guests:</FormLabel>
           <TextInput
+            disabled
             type="number"
             name="number_of_guests"
             id="number_of_guests"
             onChange={handleChange('event.guests')}
             defaultValue={event.guests}
-            placeholder="100"
+            // placeholder="100"
           />
         </FormGroup>
       </DateFormGroup>
+      <SectionHeading>
+        Contact Info <button>{'(edit)'}</button>
+      </SectionHeading>
+      <FormGroup>
+        <FormLabel htmlFor="first_name">First Name:</FormLabel>
+        <TextInput
+          disabled
+          type="text"
+          name="first_name"
+          id="first_name"
+          onChange={handleChange('user.first_name')}
+          defaultValue={user.first_name}
+          //   placeholder="First Name"
+        />
+      </FormGroup>
+      <FormGroup>
+        <FormLabel htmlFor="last_name">Last Name:</FormLabel>
+        <TextInput
+          disabled
+          type="text"
+          name="last_name"
+          id="last_name"
+          onChange={handleChange('user.last_name')}
+          defaultValue={user.last_name}
+          //   placeholder="Last Name"
+        />
+      </FormGroup>
+      <FormGroup>
+        <FormLabel htmlFor="email">Email:</FormLabel>
+        <TextInput
+          disabled
+          type="text"
+          name="email"
+          id="email"
+          onChange={handleChange('user.email')}
+          defaultValue={user.email}
+          //   placeholder="email@email.com"
+        />
+      </FormGroup>
+
+      <FormGroup>
+        <FormLabel htmlFor="phone">Phone:</FormLabel>
+        <TextInput
+          disabled
+          type="text"
+          name="phone"
+          id="phone"
+          onChange={handleChange('user.phone')}
+          defaultValue={user.phone}
+        />
+      </FormGroup>
       <ButtonGroup>
-        <FormButton onClick={nextStep}>Next</FormButton>
+        <FormButton onClick={prevStep}>Back</FormButton>
       </ButtonGroup>
     </StyledEventDetailsForm>
   );
@@ -136,13 +195,18 @@ const StyledEventDetailsForm = styled.div`
   padding: 3rem;
 `;
 
-const StepHeading = styled.h2`
-  font-size: 2.4rem;
+const SectionHeading = styled.h3`
+  font-size: 1.8rem;
   font-weight: 700;
+  margin-bottom: 1.5rem;
   text-transform: uppercase;
-  margin: 1rem 0 2rem 0;
-  span {
-    font-weight: 400;
+  display: flex;
+  align-items: center;
+  button {
+    cursor: pointer;
+    border: none;
+    margin-left: 0.5rem;
+    color: #9fbdef;
   }
 `;
 
@@ -171,8 +235,9 @@ const FormLabel = styled.label`
 `;
 
 const TextInput = styled.input`
-  border-radius: 5px;
-  border: 1px solid #4f4f4f;
+  /* border-radius: 5px; */
+  border: 1px solid transparent;
+  border-bottom: 1px solid #4f4f4f;
   font-size: inherit;
   padding: 1rem 0.5rem;
 `;

@@ -175,6 +175,7 @@ class Menu extends Component {
 
 const StyledMenu = styled.div`
   /* width: 60%; */
+  /* grid-column-start: 2; */
 `;
 
 const ItemTypeSection = styled.section`
