@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Calendar from 'react-big-calendar';
 import moment from 'moment';
@@ -19,6 +19,19 @@ function EventCalendar({
   setDate
 }) {
   const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    let isFormValid = true;
+    for (let field in event) {
+      if (event[field].length === 0) {
+        isFormValid = false;
+      }
+    }
+
+    if (isFormValid) {
+      setToggle(true);
+    }
+  }, []);
 
   const handleSelect = event => {
     if (event.slots.length > 1) {

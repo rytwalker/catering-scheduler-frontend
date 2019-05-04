@@ -5,6 +5,8 @@ import Bookings from './pages/Bookings';
 import EventsPage from './pages/Events';
 import Navigation from './components/Navigation';
 import AuthContext from './context/auth-context';
+import Footer from './components/Footer';
+
 class App extends Component {
   state = {
     token: null,
@@ -42,6 +44,7 @@ class App extends Component {
               {!this.state.token && <Redirect to="/auth" exact />}
             </Switch>
           </main>
+          <Footer>Footrer</Footer>
         </AuthContext.Provider>
       </>
     );

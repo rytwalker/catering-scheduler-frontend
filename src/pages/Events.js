@@ -21,10 +21,10 @@ class Events extends Component {
     salads: [],
     breads: [],
     user: {
-      email: 'rytwalker@gmail.com',
-      first_name: 'Ryan',
-      last_name: 'Walker',
-      phone: '+13305401036'
+      email: '',
+      first_name: '',
+      last_name: '',
+      phone: ''
     },
     event: {
       title: '',
@@ -213,6 +213,8 @@ class Events extends Component {
               nextStep={this.nextStep}
               prevStep={this.prevStep}
               user={user}
+              errors={errors}
+              addError={this.addError}
             />
           </>
         );
