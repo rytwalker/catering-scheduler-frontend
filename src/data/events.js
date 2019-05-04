@@ -1,7 +1,7 @@
 const events = [
   {
     id: 1,
-    title: 'Re-engineered',
+    title: 'Graduation Party',
     location: 'etiam faucibus cursus urna',
     address: '03 Ohio Lane',
     city: 'Omaha',
@@ -14,7 +14,7 @@ const events = [
   },
   {
     id: 2,
-    title: 'adapter',
+    title: 'Melissa Wedding Shower',
     location: 'orci luctus et ultrices',
     address: '5652 Lillian Center',
     city: 'Odessa',
@@ -27,7 +27,7 @@ const events = [
   },
   {
     id: 3,
-    title: 'moderator',
+    title: 'Sport Banquet',
     location: 'lectus vestibulum quam sapien varius ut',
     address: '23206 Mariners Cove Lane',
     city: 'Lansing',
@@ -40,7 +40,7 @@ const events = [
   },
   {
     id: 4,
-    title: 'Triple-buffered',
+    title: 'Birthday Party',
     location: 'diam vitae quam suspendisse potenti',
     address: '196 Redwing Parkway',
     city: 'Silver Spring',
@@ -53,7 +53,7 @@ const events = [
   },
   {
     id: 5,
-    title: 'didactic',
+    title: 'Big Game Cookout',
     location: 'posuere cubilia curae duis',
     address: '03 Acker Place',
     city: 'San Francisco',
@@ -66,7 +66,7 @@ const events = [
   },
   {
     id: 6,
-    title: 'content-based',
+    title: 'Volleyball Banquet',
     location: 'pede malesuada in imperdiet et commodo',
     address: '9 Claremont Avenue',
     city: 'Longview',
@@ -79,7 +79,7 @@ const events = [
   },
   {
     id: 7,
-    title: 'info-mediaries',
+    title: 'Wedding',
     location: 'sollicitudin vitae consectetuer eget rutrum',
     address: '85 Eastwood Center',
     city: 'Cincinnati',
@@ -92,7 +92,7 @@ const events = [
   },
   {
     id: 8,
-    title: 'optimizing',
+    title: 'Carey Graduation Party',
     location: 'aenean auctor gravida sem praesent id',
     address: '43490 Morrow Junction',
     city: 'Cape Coral',
@@ -105,7 +105,7 @@ const events = [
   },
   {
     id: 9,
-    title: 'object-oriented',
+    title: '50th Birthday Party',
     location: 'duis bibendum',
     address: '7 Oakridge Way',
     city: 'Midland',
@@ -118,7 +118,7 @@ const events = [
   },
   {
     id: 10,
-    title: 'reciprocal',
+    title: 'Mystery Event',
     location: 'eget semper rutrum nulla nunc purus',
     address: '6 Bartelt Place',
     city: 'Youngstown',
@@ -131,7 +131,7 @@ const events = [
   },
   {
     id: 11,
-    title: 'analyzer',
+    title: 'Football Event',
     location: 'accumsan odio curabitur convallis duis',
     address: '261 Fairfield Crossing',
     city: 'Los Angeles',
@@ -144,7 +144,7 @@ const events = [
   },
   {
     id: 12,
-    title: 'benchmark',
+    title: 'Sports Thing',
     location: 'suspendisse potenti nullam porttitor',
     address: '390 1st Alley',
     city: 'Atlanta',
@@ -157,7 +157,7 @@ const events = [
   },
   {
     id: 13,
-    title: 'attitude-oriented',
+    title: 'Charlie Daniels Band',
     location: 'at lorem integer tincidunt',
     address: '513 Basil Place',
     city: 'Hartford',
@@ -170,7 +170,7 @@ const events = [
   },
   {
     id: 14,
-    title: 'regional',
+    title: 'Chicago',
     location: 'amet consectetuer adipiscing elit',
     address: '9633 Hagan Circle',
     city: 'Peoria',
@@ -183,7 +183,7 @@ const events = [
   },
   {
     id: 15,
-    title: 'grid-enabled',
+    title: 'Earth Wind and Fire',
     location: 'odio elementum eu interdum eu tincidunt',
     address: '97 Declaration Court',
     city: 'Tucson',
@@ -196,7 +196,7 @@ const events = [
   },
   {
     id: 16,
-    title: 'productivity',
+    title: 'Baseball',
     location: 'vestibulum vestibulum ante',
     address: '30 Texas Trail',
     city: 'El Paso',
@@ -222,7 +222,7 @@ const events = [
   },
   {
     id: 18,
-    title: 'Sharable',
+    title: 'Football Tailgate',
     location: 'eu est congue elementum in',
     address: '12186 Larry Way',
     city: 'Charlotte',
@@ -235,7 +235,7 @@ const events = [
   },
   {
     id: 19,
-    title: 'analyzer',
+    title: 'Musical',
     location: 'hac habitasse platea',
     address: '82469 American Crossing',
     city: 'Grand Rapids',
@@ -248,7 +248,7 @@ const events = [
   },
   {
     id: 20,
-    title: 'bifurcated',
+    title: 'Labor Day Party',
     location: 'ac consequat metus sapien',
     address: '4922 Gerald Road',
     city: 'Albuquerque',

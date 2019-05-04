@@ -32,7 +32,8 @@ export const FormLabel = styled.label`
 export const TextInput = styled.input`
   font-family: inherit;
   font-size: inherit;
-  border: 1px solid ${black};
+  /* border: 1px solid ${black}; */
+  border: ${props => (props.isError ? `1px solid #EF9F9F` : `1px solid black`)}
   border-radius: 5px;
   padding: 1rem 0.5rem;
 `;
@@ -49,6 +50,16 @@ export const DisabledTextInput = styled.input`
 export const ButtonGroup = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const ButtonGroupTwo = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-right: auto;
+  /* flex-direction: column; */
+  button:first-child {
+    margin-right: 3rem;
+  }
 `;
 
 export const FormButton = styled.button`

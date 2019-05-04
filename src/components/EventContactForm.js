@@ -4,7 +4,7 @@ import {
   FormGroup,
   FormLabel,
   TextInput,
-  ButtonGroup,
+  ButtonGroupTwo,
   FormButton
 } from 'elements';
 
@@ -57,10 +57,10 @@ function EventContactForm({ handleChange, nextStep, prevStep, user }) {
         />
       </FormGroup>
 
-      <ButtonGroup>
+      <ButtonGroupTwo>
         <FormButton onClick={prevStep}>Back</FormButton>
         <FormButton onClick={nextStep}>Next</FormButton>
-      </ButtonGroup>
+      </ButtonGroupTwo>
     </FauxForm>
   );
 }

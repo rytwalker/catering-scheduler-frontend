@@ -3,20 +3,29 @@ import styled from 'styled-components';
 import Calendar from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import './EventCalendar.css';
 import Modal from './Modal';
 import EventDetailsForm from './EventDetailsForm';
 
 const localizer = Calendar.momentLocalizer(moment);
 
-function EventCalendar({ event, events, nextStep, handleChange }) {
+function EventCalendar({
+  addError,
+  errors,
+  event,
+  events,
+  nextStep,
+  handleChange,
+  setDate
+}) {
   const [toggle, setToggle] = useState(false);
 
-  const handleSelect = ({ start }) => {
-    console.log(new Date(start).toISOString().split('T')[0]);
-    // let date = new Date(start).toISOString().split('T')[0];
-    // this.props.handleChange('event.date')(date);
-    // this.setState({ toggle: true });
-
+  const handleSelect = event => {
+    if (event.slots.length > 1) {
+      return;
+    }
+    let date = new Date(event.start).toISOString().split('T')[0];
+    setDate(date);
     setToggle(true);
   };
 
@@ -31,14 +40,17 @@ function EventCalendar({ event, events, nextStep, handleChange }) {
         defaultView="month"
         events={events}
         style={{ height: '70vh' }}
+        views={{ month: true }}
         onSelectSlot={handleSelect}
       />
       {toggle && (
         <Modal handleToggle={handleToggle}>
           <EventDetailsForm
-            handleChange={handleChange}
             event={event}
+            handleChange={handleChange}
             nextStep={nextStep}
+            errors={errors}
+            addError={addError}
           />
         </Modal>
       )}

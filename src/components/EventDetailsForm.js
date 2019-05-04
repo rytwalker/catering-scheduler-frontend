@@ -11,7 +11,22 @@ import {
   StepHeading
 } from 'elements';
 
-function EventDetailsForm({ event, handleChange, nextStep }) {
+function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
+  const continueOn = () => {
+    let isValid = true;
+    for (let field in event) {
+      if (event[field].length === 0) {
+        console.log(field);
+        addError(field);
+        isValid = false;
+      }
+    }
+
+    if (isValid) {
+      nextStep();
+    }
+  };
+
   return (
     <FauxForm>
       <StepHeading>
@@ -26,6 +41,7 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
           onChange={handleChange('event.title')}
           defaultValue={event.title}
           placeholder="Graduation Party"
+          isError={errors.title}
         />
       </FormGroup>
       <FormGroup>
@@ -37,6 +53,7 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
           onChange={handleChange('event.location')}
           defaultValue={event.location}
           placeholder="Boardman Park"
+          isError={errors.location}
         />
       </FormGroup>
       <FormGroup>
@@ -48,6 +65,7 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
           onChange={handleChange('event.address')}
           defaultValue={event.address}
           placeholder="123 Green Ave."
+          isError={errors.address}
         />
       </FormGroup>
       <LocationInputGroup>
@@ -60,6 +78,7 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
             onChange={handleChange('event.city')}
             defaultValue={event.city}
             placeholder="Boardman"
+            isError={errors.city}
           />
         </FormGroup>
         <FormGroup>
@@ -71,6 +90,7 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
             onChange={handleChange('event.state')}
             defaultValue={event.state}
             placeholder="Ohio"
+            isError={errors.state}
           />
         </FormGroup>
         <FormGroup>
@@ -82,6 +102,7 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
             onChange={handleChange('event.zipcode')}
             defaultValue={event.zipcode}
             placeholder="44512"
+            isError={errors.zipcode}
           />
         </FormGroup>
       </LocationInputGroup>
@@ -94,7 +115,8 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
             id="date"
             onChange={handleChange('event.date')}
             defaultValue={event.date}
-            // placeholder="$200.50"
+            disabled
+            isError={errors.date}
           />
         </FormGroup>
         <FormGroup>
@@ -105,7 +127,8 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
             id="start_time"
             onChange={handleChange('event.start_time')}
             defaultValue={event.start_time}
-            placeholder="7:00pm"
+            placeholder="19:00:00"
+            isError={errors.start_time}
           />
         </FormGroup>
         <FormGroup>
@@ -116,7 +139,8 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
             id="end_time"
             onChange={handleChange('event.end_time')}
             defaultValue={event.end_time}
-            placeholder="7:00pm"
+            placeholder="20:00:00"
+            isError={errors.end_time}
           />
         </FormGroup>
         <FormGroup>
@@ -128,11 +152,12 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
             onChange={handleChange('event.guests')}
             defaultValue={event.guests}
             placeholder="100"
+            isError={errors.guests}
           />
         </FormGroup>
       </DateInputGroup>
       <ButtonGroup>
-        <FormButton onClick={nextStep}>Next</FormButton>
+        <FormButton onClick={continueOn}>Next</FormButton>
       </ButtonGroup>
     </FauxForm>
   );

@@ -27,17 +27,18 @@ class Events extends Component {
       phone: '+13305401036'
     },
     event: {
-      title: "Ryan's Bash",
-      location: 'Boardman Park',
-      address: '123 Street Lane',
-      city: 'Boardman',
-      state: 'Ohio',
-      zipcode: 44512,
-      guests: 100,
-      date: '2019-05-10',
-      start_time: '17:00:00',
-      end_time: '20:00:00'
-    }
+      title: '',
+      location: '',
+      address: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      guests: '',
+      date: '',
+      start_time: '',
+      end_time: ''
+    },
+    errors: {}
   };
 
   componentDidMount() {
@@ -52,6 +53,12 @@ class Events extends Component {
       allDay: event.guests > 200 ? true : false
     }));
     this.setState({ events: [...events] });
+  };
+
+  addError = field => {
+    this.setState(prevState => {
+      return { errors: { ...prevState.errors, [field]: true } };
+    });
   };
 
   handleChange = input => e => {
@@ -77,6 +84,9 @@ class Events extends Component {
       this.setState({ [splitInput[0]]: e.target.value });
     }
   };
+
+  setDate = date =>
+    this.setState({ event: { ...this.state.event, date: date } });
 
   nextStep = () => {
     let { step } = this.state;
@@ -170,7 +180,8 @@ class Events extends Component {
       totalPrice,
       event,
       step,
-      user
+      user,
+      errors
     } = this.state;
     switch (step) {
       case 1:
@@ -184,6 +195,9 @@ class Events extends Component {
               handleChange={this.handleChange}
               event={event}
               events={this.state.events}
+              setDate={this.setDate}
+              errors={errors}
+              addError={this.addError}
             />
           </>
         );
