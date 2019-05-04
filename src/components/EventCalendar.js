@@ -1,78 +1,49 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Calendar from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import events from '../data/events';
 import Modal from './Modal';
 import EventDetailsForm from './EventDetailsForm';
 
-const upcomingEvents = [...events];
-
-// import Calendar from 'react-calendar';
 const localizer = Calendar.momentLocalizer(moment);
 
-class EventCalendar extends Component {
-  state = {
-    toggle: false,
-    events: [
-      {
-        start: new Date(),
-        end: new Date(moment().add(1, 'days')),
-        title: 'Some title'
-      }
-    ]
-  };
+function EventCalendar({ event, events, nextStep, handleChange }) {
+  const [toggle, setToggle] = useState(false);
 
-  componentDidMount() {
-    this.populateCalendar();
-  }
-
-  populateCalendar = () => {
-    let events = upcomingEvents.map(event => ({
-      start: new Date(event.date + 'T' + event.start_time + 'Z'),
-      end: new Date(event.date + 'T' + event.end_time + 'Z'),
-      title: event.title,
-      allDay: event.guests > 200 ? true : false
-    }));
-    this.setState({ events: [...events] });
-  };
-
-  continue = () => {
-    this.props.nextStep();
-  };
-
-  handleSelect = ({ start }) => {
+  const handleSelect = ({ start }) => {
     console.log(new Date(start).toISOString().split('T')[0]);
     // let date = new Date(start).toISOString().split('T')[0];
     // this.props.handleChange('event.date')(date);
-    this.setState({ toggle: true });
+    // this.setState({ toggle: true });
+
+    setToggle(true);
   };
 
-  render() {
-    return (
-      <Container>
-        <Calendar
-          selectable
-          localizer={localizer}
-          defaultDate={new Date()}
-          defaultView="month"
-          events={this.state.events}
-          style={{ height: '70vh' }}
-          onSelectSlot={this.handleSelect}
-        />
-        {this.state.toggle && (
-          <Modal>
-            <EventDetailsForm
-              handleChange={this.props.handleChange}
-              event={this.props.event}
-              nextStep={this.props.nextStep}
-            />
-          </Modal>
-        )}
-      </Container>
-    );
-  }
+  const handleToggle = () => setToggle(!toggle);
+
+  return (
+    <Container>
+      <Calendar
+        selectable
+        localizer={localizer}
+        defaultDate={new Date()}
+        defaultView="month"
+        events={events}
+        style={{ height: '70vh' }}
+        onSelectSlot={handleSelect}
+      />
+      {toggle && (
+        <Modal handleToggle={handleToggle}>
+          <EventDetailsForm
+            handleChange={handleChange}
+            event={event}
+            nextStep={nextStep}
+          />
+        </Modal>
+      )}
+    </Container>
+  );
 }
 
 const Container = styled.div`

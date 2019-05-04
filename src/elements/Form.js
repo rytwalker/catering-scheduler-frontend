@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { white, lightGrey } from 'utilities';
+import { white, lightGrey, black, primary } from 'utilities';
 
 export const Form = styled.form`
   background: ${white};
@@ -30,9 +30,19 @@ export const FormLabel = styled.label`
 `;
 
 export const TextInput = styled.input`
-  border-radius: 5px;
-  border: 1px solid #4f4f4f;
+  font-family: inherit;
   font-size: inherit;
+  border: 1px solid ${black};
+  border-radius: 5px;
+  padding: 1rem 0.5rem;
+`;
+
+export const DisabledTextInput = styled.input`
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  border: 1px solid transparent;
+  border-bottom: 1px solid ${black};
   padding: 1rem 0.5rem;
 `;
 
@@ -42,26 +52,29 @@ export const ButtonGroup = styled.div`
 `;
 
 export const FormButton = styled.button`
-  background: #9fbdef;
-  color: #fff;
-  font-weight: 400;
   font-size: inherit;
+  font-weight: 400;
   text-transform: uppercase;
-  padding: 1rem;
+  color: ${white};
+  background: ${primary};
+  border: transparent;
   border-radius: 5px;
   margin-bottom: 2rem;
-  border: transparent;
+  padding: 1rem;
   cursor: pointer;
 `;
 
-export const LocationFormGroup = styled.div`
+export const InputGroup = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
   grid-column-gap: 2rem;
 `;
 
-export const DateFormGroup = styled.div`
+export const LocationInputGroup = styled(InputGroup)`
+  grid-template-columns: 2fr 1fr 1fr;
+`;
+
+export const DateInputGroup = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
   grid-column-gap: 2rem;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
 `;

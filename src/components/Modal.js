@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Portal } from 'utilities';
+import { black, primary } from 'utilities';
 
-const Modal = ({ children }) => {
+const Modal = ({ children, handleToggle }) => {
   return (
     <Portal>
       <ModalWrapper>
         <ModalCard>
-          <CloseButton>X</CloseButton>
+          <CloseButton onClick={handleToggle}>X</CloseButton>
           <div>{children}</div>
         </ModalCard>
         <Background />
@@ -55,12 +56,12 @@ const CloseButton = styled.button`
   padding: calc(45px - 2rem);
   font-size: 2rem;
   font-weight: bold;
-  color: #fafafa;
+  color: ${black};
   cursor: pointer;
   transition: all 0.2s;
 
   &:hover {
-    color: #b5e8d5;
+    color: ${primary};
   }
 `;
 

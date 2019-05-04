@@ -6,8 +6,8 @@ import {
   TextInput,
   ButtonGroup,
   FormButton,
-  LocationFormGroup,
-  DateFormGroup,
+  LocationInputGroup,
+  DateInputGroup,
   StepHeading
 } from 'elements';
 
@@ -50,7 +50,7 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
           placeholder="123 Green Ave."
         />
       </FormGroup>
-      <LocationFormGroup>
+      <LocationInputGroup>
         <FormGroup>
           <FormLabel htmlFor="city">City:</FormLabel>
           <TextInput
@@ -84,8 +84,8 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
             placeholder="44512"
           />
         </FormGroup>
-      </LocationFormGroup>
-      <DateFormGroup>
+      </LocationInputGroup>
+      <DateInputGroup>
         <FormGroup>
           <FormLabel htmlFor="date">Date:</FormLabel>
           <TextInput
@@ -130,7 +130,7 @@ function EventDetailsForm({ event, handleChange, nextStep }) {
             placeholder="100"
           />
         </FormGroup>
-      </DateFormGroup>
+      </DateInputGroup>
       <ButtonGroup>
         <FormButton onClick={nextStep}>Next</FormButton>
       </ButtonGroup>

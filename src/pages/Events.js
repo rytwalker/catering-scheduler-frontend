@@ -5,10 +5,13 @@ import MenuSidebar from '../components/MenuSidebar';
 import EventCalendar from '../components/EventCalendar';
 import EventContactForm from '../components/EventContactForm';
 import EventConfirmForm from '../components/EventConfirmForm';
+import events from '../data/events';
+const upcomingEvents = [...events];
 
 class Events extends Component {
   state = {
-    step: 2,
+    events: [],
+    step: 1,
     totalPrice: 0,
     gratuity: 0.18,
     pricePerPlate: 16.0,
@@ -35,6 +38,20 @@ class Events extends Component {
       start_time: '17:00:00',
       end_time: '20:00:00'
     }
+  };
+
+  componentDidMount() {
+    this.populateCalendar();
+  }
+
+  populateCalendar = () => {
+    let events = upcomingEvents.map(event => ({
+      start: new Date(event.date + 'T' + event.start_time + 'Z'),
+      end: new Date(event.date + 'T' + event.end_time + 'Z'),
+      title: event.title,
+      allDay: event.guests > 200 ? true : false
+    }));
+    this.setState({ events: [...events] });
   };
 
   handleChange = input => e => {
@@ -166,6 +183,7 @@ class Events extends Component {
               nextStep={this.nextStep}
               handleChange={this.handleChange}
               event={event}
+              events={this.state.events}
             />
           </>
         );
