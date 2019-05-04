@@ -316,6 +316,7 @@ button.rbc-input::-moz-focus-inner {
   padding: 5px;
   text-align: left;
   position: relative;
+  pointer-events: all;
 }
 .rbc-date-cell.rbc-now {
   font-weight: bold;
@@ -327,6 +328,7 @@ button.rbc-input::-moz-focus-inner {
   text-decoration: none;
   font-size: 24px;
   padding: 10px;
+  pointer-events: all;
 }
 .rbc-row-bg {
   display: -webkit-flex;
@@ -344,6 +346,12 @@ button.rbc-input::-moz-focus-inner {
   -webkit-flex: 1 0 0%;
   -ms-flex: 1 0 0%;
   flex: 1 0 0%;
+  transition: all 0.2s;
+}
+
+.rbc-day-bg:hover {
+  background: #dce4f1;
+  cursor: pointer;
 }
 .rbc-day-bg + .rbc-day-bg {
   border-left: 1px solid #ddd;

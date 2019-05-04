@@ -11,7 +11,7 @@ const Modal = ({ children, handleToggle }) => {
           <CloseButton onClick={handleToggle}>X</CloseButton>
           <div>{children}</div>
         </ModalCard>
-        <Background />
+        <Background onClick={handleToggle} />
       </ModalWrapper>
     </Portal>
   );

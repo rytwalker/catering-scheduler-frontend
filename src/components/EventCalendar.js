@@ -21,6 +21,7 @@ function EventCalendar({
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
+    console.log('running');
     let isFormValid = true;
     for (let field in event) {
       if (event[field].length === 0) {
