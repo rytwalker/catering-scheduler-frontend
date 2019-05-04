@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { white, lightGrey, black, primary } from 'utilities';
+import { white, lightGrey, black, primary, red } from 'utilities';
 
 export const Form = styled.form`
   background: ${white};
@@ -32,8 +32,7 @@ export const FormLabel = styled.label`
 export const TextInput = styled.input`
   font-family: inherit;
   font-size: inherit;
-  /* border: 1px solid ${black}; */
-  border: ${props => (props.isError ? `1px solid #EF9F9F` : `1px solid black`)}
+  border: 1px solid ${props => (props.isError ? red : black)};
   border-radius: 5px;
   padding: 1rem 0.5rem;
 `;
@@ -45,6 +44,13 @@ export const DisabledTextInput = styled.input`
   border: 1px solid transparent;
   border-bottom: 1px solid ${black};
   padding: 1rem 0.5rem;
+`;
+
+export const ErrorField = styled.div`
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: ${red};
+  margin-top: 5px;
 `;
 
 export const ButtonGroup = styled.div`

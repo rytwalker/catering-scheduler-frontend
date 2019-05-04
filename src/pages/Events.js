@@ -78,7 +78,8 @@ class Events extends Component {
         [splitInput[0]]: {
           ...currentObject,
           [splitInput[1]]: e.target.value
-        }
+        },
+        errors: { ...this.state.errors, [splitInput[1]]: false }
       });
     } else if (splitInput.length === 1) {
       this.setState({ [splitInput[0]]: e.target.value });

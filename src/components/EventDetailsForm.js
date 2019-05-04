@@ -3,6 +3,7 @@ import {
   FauxForm,
   FormGroup,
   FormLabel,
+  ErrorField,
   TextInput,
   ButtonGroup,
   FormButton,
@@ -16,7 +17,6 @@ function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
     let isValid = true;
     for (let field in event) {
       if (event[field].length === 0) {
-        console.log(field);
         addError(field);
         isValid = false;
       }
@@ -43,6 +43,7 @@ function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
           placeholder="Graduation Party"
           isError={errors.title}
         />
+        {errors.title ? <ErrorField>Field is required</ErrorField> : null}
       </FormGroup>
       <FormGroup>
         <FormLabel htmlFor="location">Location:</FormLabel>
@@ -55,6 +56,7 @@ function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
           placeholder="Boardman Park"
           isError={errors.location}
         />
+        {errors.location ? <ErrorField>Field is required</ErrorField> : null}
       </FormGroup>
       <FormGroup>
         <FormLabel htmlFor="address">Address:</FormLabel>
@@ -67,6 +69,7 @@ function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
           placeholder="123 Green Ave."
           isError={errors.address}
         />
+        {errors.address ? <ErrorField>Field is required</ErrorField> : null}
       </FormGroup>
       <LocationInputGroup>
         <FormGroup>
@@ -80,6 +83,7 @@ function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
             placeholder="Boardman"
             isError={errors.city}
           />
+          {errors.city ? <ErrorField>Field is required</ErrorField> : null}
         </FormGroup>
         <FormGroup>
           <FormLabel htmlFor="state">State:</FormLabel>
@@ -92,6 +96,7 @@ function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
             placeholder="Ohio"
             isError={errors.state}
           />
+          {errors.state ? <ErrorField>Field is required</ErrorField> : null}
         </FormGroup>
         <FormGroup>
           <FormLabel htmlFor="zipcode">Zip:</FormLabel>
@@ -104,6 +109,7 @@ function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
             placeholder="44512"
             isError={errors.zipcode}
           />
+          {errors.zipcode ? <ErrorField>Field is required</ErrorField> : null}
         </FormGroup>
       </LocationInputGroup>
       <DateInputGroup>
@@ -118,6 +124,7 @@ function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
             disabled
             isError={errors.date}
           />
+          {errors.date ? <ErrorField>Field is required</ErrorField> : null}
         </FormGroup>
         <FormGroup>
           <FormLabel htmlFor="start_time">Start Time:</FormLabel>
@@ -130,6 +137,9 @@ function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
             placeholder="19:00:00"
             isError={errors.start_time}
           />
+          {errors.start_time ? (
+            <ErrorField>Field is required</ErrorField>
+          ) : null}
         </FormGroup>
         <FormGroup>
           <FormLabel htmlFor="end_time">End Time:</FormLabel>
@@ -142,6 +152,7 @@ function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
             placeholder="20:00:00"
             isError={errors.end_time}
           />
+          {errors.end_time ? <ErrorField>Field is required</ErrorField> : null}
         </FormGroup>
         <FormGroup>
           <FormLabel htmlFor="number_of_guests">Guests:</FormLabel>
@@ -154,6 +165,7 @@ function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
             placeholder="100"
             isError={errors.guests}
           />
+          {errors.guests ? <ErrorField>Field is required</ErrorField> : null}
         </FormGroup>
       </DateInputGroup>
       <ButtonGroup>
