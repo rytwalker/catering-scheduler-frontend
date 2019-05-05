@@ -150,6 +150,10 @@ const SubmitButton = styled.button`
   cursor: pointer;
   font-weight: 700;
   text-transform: uppercase;
+  transition: all 0.2s;
+  &:hover {
+    background: '#75A5F5';
+  }
   /* font */
 `;
 

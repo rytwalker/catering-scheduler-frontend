@@ -5,17 +5,29 @@ import {
   FormGroup,
   FormLabel,
   DisabledTextInput,
-  ButtonGroup,
-  FormButton,
   LocationInputGroup,
   DateInputGroup
 } from 'elements';
 
-function EventDetailsForm({ event, handleChange, nextStep, prevStep, user }) {
+function EventDetailsForm({
+  event,
+  handleChange,
+  user,
+  meats,
+  sides,
+  salads,
+  breads,
+  totalPrice,
+  jumpStep
+}) {
+  const jumpSection = step => {
+    jumpStep(step);
+  };
+
   return (
     <FauxForm>
       <SectionHeading>
-        Event Details <button>{'(edit)'}</button>
+        Event Details <button onClick={() => jumpSection(1)}>{'(edit)'}</button>
       </SectionHeading>
       <FormGroup>
         <FormLabel htmlFor="title">Event Name:</FormLabel>
@@ -131,7 +143,7 @@ function EventDetailsForm({ event, handleChange, nextStep, prevStep, user }) {
         </FormGroup>
       </DateInputGroup>
       <SectionHeading>
-        Contact Info <button>{'(edit)'}</button>
+        Contact Info <button onClick={() => jumpSection(2)}>{'(edit)'}</button>
       </SectionHeading>
       <FormGroup>
         <FormLabel htmlFor="first_name">First Name:</FormLabel>
@@ -166,7 +178,6 @@ function EventDetailsForm({ event, handleChange, nextStep, prevStep, user }) {
           defaultValue={user.email}
         />
       </FormGroup>
-
       <FormGroup>
         <FormLabel htmlFor="phone">Phone:</FormLabel>
         <DisabledTextInput
@@ -179,11 +190,37 @@ function EventDetailsForm({ event, handleChange, nextStep, prevStep, user }) {
         />
       </FormGroup>
       <SectionHeading>
-        Menu <button>{'(edit)'}</button>
+        Menu <button onClick={() => jumpSection(3)}>{'(edit)'}</button>
       </SectionHeading>
-      <ButtonGroup>
-        <FormButton onClick={prevStep}>Back</FormButton>
-      </ButtonGroup>
+      <div className="container">
+        <SidebarItem>
+          <ItemHeading>Meats</ItemHeading>
+          {meats && meats.map(meat => <p>{meat}</p>)}
+        </SidebarItem>
+        <SidebarItem>
+          <ItemHeading>Sides</ItemHeading>
+          {sides && sides.map(side => <p>{side}</p>)}
+        </SidebarItem>
+        <SidebarItem>
+          <ItemHeading>Salads</ItemHeading>
+          {salads && salads.map(salad => <p>{salad}</p>)}
+        </SidebarItem>
+        <SidebarItem>
+          <ItemHeading>Bread</ItemHeading>
+          {breads && breads.map(bread => <p>{bread}</p>)}
+        </SidebarItem>
+        <Total>
+          <h3>
+            Total: <span>${totalPrice.toFixed(2)}</span>
+          </h3>
+        </Total>
+        <SubmitButton>
+          Book Party{' '}
+          <span role="img" aria-label="party">
+            🎉
+          </span>
+        </SubmitButton>
+      </div>
     </FauxForm>
   );
 }
@@ -201,6 +238,47 @@ const SectionHeading = styled.h3`
     margin-left: 0.5rem;
     color: #9fbdef;
   }
+`;
+
+const SidebarItem = styled.div`
+  margin-bottom: 3rem;
+  p {
+    line-height: 1.3;
+  }
+`;
+
+const Total = styled(SidebarItem)`
+  h3 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+
+    span {
+      color: #9fbdef;
+    }
+  }
+`;
+
+const ItemHeading = styled.h3`
+  text-transform: uppercase;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+`;
+
+const SubmitButton = styled.button`
+  display: block;
+  font-size: 2rem;
+  width: 100%;
+  border: 1px solid transparent;
+  background: #9fbdef;
+  padding: 1rem;
+  color: #fafafa;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
 `;
 
 export default EventDetailsForm;

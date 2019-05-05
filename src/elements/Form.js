@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { white, lightGrey, black, primary, red } from 'utilities';
+import { white, lightGrey, black, primary, primaryDark, red } from 'utilities';
 
 export const Form = styled.form`
   background: ${white};
@@ -79,6 +79,10 @@ export const FormButton = styled.button`
   margin-bottom: 2rem;
   padding: 1rem;
   cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    background: ${primaryDark};
+  }
 `;
 
 export const InputGroup = styled.div`

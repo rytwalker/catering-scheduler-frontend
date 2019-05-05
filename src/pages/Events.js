@@ -11,7 +11,7 @@ const upcomingEvents = [...events];
 class Events extends Component {
   state = {
     events: [],
-    step: 3,
+    step: 1,
     totalPrice: 0,
     gratuity: 0.18,
     pricePerPlate: 16.0,
@@ -96,6 +96,10 @@ class Events extends Component {
   prevStep = () => {
     let { step } = this.state;
     this.setState({ step: step - 1 });
+  };
+
+  jumpStep = step => {
+    this.setState({ step });
   };
 
   updateGuestNumber = number => {
@@ -261,6 +265,12 @@ class Events extends Component {
               prevStep={this.prevStep}
               user={user}
               event={event}
+              totalPrice={totalPrice}
+              meats={meats}
+              sides={sides}
+              salads={salads}
+              breads={breads}
+              jumpStep={this.jumpStep}
             />
           </>
         );
