@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { CardContainer, ItemCard } from 'elements';
 
 const meats = [
   {
@@ -115,42 +116,46 @@ class Menu extends Component {
               hard woods and non-seasoned cherry wood.
             </p>
           </ItemHeader>
-          <ItemCards>
+          <CardContainer>
             {meats.map(meat => (
-              <ItemCard key={meat.id} onClick={() => this.selectItem(meat)}>
+              <ItemCard
+                selected
+                key={meat.id}
+                onClick={() => this.selectItem(meat)}
+              >
                 <h3>{meat.name}</h3>
                 <ItemLogo>M</ItemLogo>
                 <p>{meat.price} per plate</p>
               </ItemCard>
             ))}
-          </ItemCards>
+          </CardContainer>
         </ItemTypeSection>
         <ItemTypeSection>
           <ItemHeader>
             <ItemHeading>Select 3 Sides</ItemHeading>
             <p>Additional sides can be added for $1.00 per guest.</p>
           </ItemHeader>
-          <ItemCards>
+          <CardContainer>
             {sides.map(side => (
               <ItemCard key={side.id} onClick={() => this.selectItem(side)}>
                 <h3>{side.name}</h3>
                 <ItemLogo>S</ItemLogo>
               </ItemCard>
             ))}
-          </ItemCards>
+          </CardContainer>
         </ItemTypeSection>
         <ItemTypeSection>
           <ItemHeader>
             <ItemHeading>Select 2 Salads</ItemHeading>
           </ItemHeader>
-          <ItemCards>
+          <CardContainer>
             {salads.map(salad => (
               <ItemCard key={salad.id} onClick={() => this.selectItem(salad)}>
                 <h3>{salad.name}</h3>
                 <ItemLogo>S</ItemLogo>
               </ItemCard>
             ))}
-          </ItemCards>
+          </CardContainer>
         </ItemTypeSection>
         <ItemTypeSection>
           <ItemHeader>
@@ -160,14 +165,14 @@ class Menu extends Component {
               for a combination.
             </p>
           </ItemHeader>
-          <ItemCards>
+          <CardContainer>
             {salads.map(salad => (
               <ItemCard key={salad.id}>
                 <h3>{salad.name}</h3>
                 <ItemLogo>S</ItemLogo>
               </ItemCard>
             ))}
-          </ItemCards>
+          </CardContainer>
         </ItemTypeSection>
       </StyledMenu>
     );
@@ -186,46 +191,6 @@ const ItemTypeSection = styled.section`
   margin-bottom: 5rem;
 `;
 
-const ItemHeader = styled.header`
-  margin-bottom: 2rem;
-`;
-
-const ItemHeading = styled.h2`
-  font-size: 3.6rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 1rem;
-`;
-
-const ItemCards = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 3rem;
-`;
-
-const ItemCard = styled.div`
-  color: #4f4f4f;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  /* width: 30%; */
-  height: 250px;
-  cursor: pointer;
-  text-align: center;
-  padding: 1rem;
-  transition: all 0.2s;
-  &:hover {
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
-    transform: translate3d(0, -2px, 0);
-  }
-  h3 {
-    font-size: 2rem;
-  }
-
-  p {
-    font-size: 1rem;
-  }
-`;
-
 const ItemLogo = styled.div`
   color: #9fbdef;
   background: #4f4f4f;
@@ -237,6 +202,17 @@ const ItemLogo = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 5rem;
+`;
+
+export const ItemHeader = styled.header`
+  margin-bottom: 2rem;
+`;
+
+export const ItemHeading = styled.h2`
+  font-size: 3.6rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 1rem;
 `;
 
 export default Menu;

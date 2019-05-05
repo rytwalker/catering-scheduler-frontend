@@ -73,6 +73,7 @@ const Sidebar = styled.div`
 
   .container {
     position: fixed;
+    bottom: 0;
     padding: 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     background: #fff;

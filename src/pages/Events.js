@@ -11,7 +11,7 @@ const upcomingEvents = [...events];
 class Events extends Component {
   state = {
     events: [],
-    step: 1,
+    step: 3,
     totalPrice: 0,
     gratuity: 0.18,
     pricePerPlate: 16.0,
@@ -33,7 +33,7 @@ class Events extends Component {
       city: '',
       state: '',
       zipcode: '',
-      guests: '',
+      guests: '100',
       date: '',
       start_time: '',
       end_time: ''
