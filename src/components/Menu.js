@@ -7,11 +7,6 @@ class Menu extends Component {
   selectItem = item => {
     const { handleItemSelection } = this.props;
     handleItemSelection(item);
-    if (item.selected) {
-      item.selected = false;
-    } else {
-      item.selected = true;
-    }
   };
   render() {
     return (

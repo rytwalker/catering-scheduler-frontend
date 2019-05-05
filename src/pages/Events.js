@@ -125,11 +125,14 @@ class Events extends Component {
       let removedItem = itemCollection.filter(i => i !== item.name);
       if (removedItem.length !== itemCollection.length) {
         this.setState({ [collection]: [...removedItem] });
+        item.selected = false;
       } else if (itemCollection.length < maxLength) {
         this.setState({ [collection]: [...itemCollection, item.name] });
+        item.selected = true;
       }
     } else {
       this.setState({ [collection]: [...itemCollection, item.name] });
+      item.selected = true;
     }
   };
 
@@ -146,12 +149,12 @@ class Events extends Component {
     }
   };
 
-  // updatePriceTier = item => {
-  //   const { priceTier } = this.state;
-  //   if (item.type === 'meat') {
-  //     if (item.tier === 1)
-  //   }
-  // }
+  updatePriceTier = item => {
+    const { priceTier, meats } = this.state;
+    if (meats.length === 0 && priceTier !== 1) {
+      this.setState({ priceTier: 1 });
+    }
+  };
 
   handleItemSelection = item => {
     switch (item.type) {
