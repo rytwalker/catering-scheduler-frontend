@@ -228,6 +228,10 @@ class Events extends Component {
               <Menu
                 handleItemSelection={this.handleItemSelection}
                 prevStep={this.prevStep}
+                meats={meats}
+                sides={sides}
+                salads={salads}
+                breads={breads}
               />
               <MenuSidebar
                 meats={meats}

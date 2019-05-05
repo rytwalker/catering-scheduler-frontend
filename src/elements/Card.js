@@ -23,6 +23,7 @@ export const ItemCard = styled(Card)`
   height: 250px;
   cursor: pointer;
   text-align: center;
+  position: relative;
   h3 {
     font-size: 2rem;
   }

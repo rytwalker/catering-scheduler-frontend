@@ -1,108 +1,17 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { CardContainer, ItemCard } from 'elements';
-
-const meats = [
-  {
-    id: 1,
-    name: 'BBQ Pork Loin',
-    price: '$16.00',
-    type: 'meat',
-    tier: 1
-  },
-  {
-    id: 2,
-    name: 'Smoked Bone-In Chicken Thighs',
-    price: '$16.00',
-    type: 'meat',
-    tier: 1
-  },
-  {
-    id: 3,
-    name: 'Boneless Chicken Breasts',
-    price: '$16.00',
-    type: 'meat',
-    tier: 1
-  },
-  {
-    id: 4,
-    name: 'Angus Top Round Beef',
-    price: '$16.00',
-    type: 'meat',
-    tier: 2
-  },
-  {
-    id: 5,
-    name: 'Smoked Boneless Turkey Breast',
-    price: '$16.00',
-    type: 'meat',
-    tier: 2
-  },
-  {
-    id: 6,
-    name: 'BBQ Babyback Ribs',
-    price: '$16.00',
-    type: 'meat',
-    tier: 2
-  },
-  {
-    id: 7,
-    name: 'French Cut Lamb Ribs',
-    price: '$16.00',
-    type: 'meat',
-    tier: 3
-  }
-];
-
-const sides = [
-  {
-    id: 1,
-    name: "David's Potato Crepes",
-    type: 'side'
-  },
-  {
-    id: 2,
-    name: 'Green Beans',
-    type: 'side'
-  },
-  {
-    id: 3,
-    name: 'Roasted Red Peppers',
-    type: 'side'
-  },
-  {
-    id: 4,
-    name: 'Hungarian Hot Peppers',
-    type: 'side'
-  },
-  {
-    id: 5,
-    name: 'Roasted Zuccini and Yellow Squash',
-    type: 'side'
-  },
-  {
-    id: 6,
-    name: 'Brussel Sprouts and Bacon',
-    type: 'side'
-  },
-  {
-    id: 7,
-    name: 'Steamed Corn on the Cob',
-    type: 'side'
-  }
-];
-
-const salads = [
-  { id: 1, name: 'Penne or Bow Tie Pasta Salad', type: 'salad' },
-  { id: 2, name: 'Tomato, Onion, and Pepper Salad', type: 'salad' },
-  { id: 3, name: 'Tossed Salad', type: 'salad' }
-];
+import { meats, sides, salads, breads } from '../data/food';
 
 class Menu extends Component {
-  state = {};
   selectItem = item => {
     const { handleItemSelection } = this.props;
     handleItemSelection(item);
+    if (item.selected) {
+      item.selected = false;
+    } else {
+      item.selected = true;
+    }
   };
   render() {
     return (
@@ -118,11 +27,8 @@ class Menu extends Component {
           </ItemHeader>
           <CardContainer>
             {meats.map(meat => (
-              <ItemCard
-                selected
-                key={meat.id}
-                onClick={() => this.selectItem(meat)}
-              >
+              <ItemCard key={meat.id} onClick={() => this.selectItem(meat)}>
+                {meat.selected ? <CardOverlay>1</CardOverlay> : null}
                 <h3>{meat.name}</h3>
                 <ItemLogo>M</ItemLogo>
                 <p>{meat.price} per plate</p>
@@ -138,6 +44,7 @@ class Menu extends Component {
           <CardContainer>
             {sides.map(side => (
               <ItemCard key={side.id} onClick={() => this.selectItem(side)}>
+                {side.selected ? <CardOverlay>1</CardOverlay> : null}
                 <h3>{side.name}</h3>
                 <ItemLogo>S</ItemLogo>
               </ItemCard>
@@ -151,6 +58,7 @@ class Menu extends Component {
           <CardContainer>
             {salads.map(salad => (
               <ItemCard key={salad.id} onClick={() => this.selectItem(salad)}>
+                {salad.selected ? <CardOverlay>1</CardOverlay> : null}
                 <h3>{salad.name}</h3>
                 <ItemLogo>S</ItemLogo>
               </ItemCard>
@@ -166,9 +74,10 @@ class Menu extends Component {
             </p>
           </ItemHeader>
           <CardContainer>
-            {salads.map(salad => (
-              <ItemCard key={salad.id}>
-                <h3>{salad.name}</h3>
+            {breads.map(bread => (
+              <ItemCard key={bread.id} onClick={() => this.selectItem(bread)}>
+                {bread.selected ? <CardOverlay>1</CardOverlay> : null}
+                <h3>{bread.name}</h3>
                 <ItemLogo>S</ItemLogo>
               </ItemCard>
             ))}
@@ -182,6 +91,19 @@ class Menu extends Component {
 const StyledMenu = styled.div`
   /* width: 60%; */
   /* grid-column-start: 2; */
+`;
+
+const CardOverlay = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  transition: all 0.2s;
 `;
 
 const ItemTypeSection = styled.section`
