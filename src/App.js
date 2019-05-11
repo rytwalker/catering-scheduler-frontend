@@ -6,6 +6,7 @@ import EventsPage from './pages/Events';
 import Navigation from './components/Navigation';
 import AuthContext from './context/auth-context';
 import Footer from './components/Footer';
+import EventContext from './pages/EventContext';
 
 class App extends Component {
   state = {
@@ -40,6 +41,7 @@ class App extends Component {
               )}
               {!this.state.token && <Route path="/auth" component={AuthPage} />}
               <Route path="/calendar" component={EventsPage} />
+              <Route path="/context" component={EventContext} />
               {this.state.token && <Route path="/book" component={Bookings} />}
               {!this.state.token && <Redirect to="/auth" exact />}
             </Switch>

@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 
-export default React.createContext({
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'UPDATE_FIELD':
+      return {
+        ...state
+      };
+    case 'INCREMENT_STEP':
+      return {
+        ...state,
+        step: (state.step += 1)
+      };
+    default:
+      return state;
+  }
+};
+
+const initalState = {
   events: [],
   step: 3,
   totalPrice: 0,
@@ -30,4 +46,16 @@ export default React.createContext({
     end_time: ''
   },
   errors: {}
-});
+};
+
+export const ComponentContext = createContext(initalState);
+
+export const EventProvider = ({ children }) => {
+  return (
+    <ComponentContext.Provider value={useReducer(reducer, initalState)}>
+      {children}
+    </ComponentContext.Provider>
+  );
+};
+
+export const useEvent = () => useContext(ComponentContext);
