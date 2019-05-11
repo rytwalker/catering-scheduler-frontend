@@ -2,9 +2,14 @@ import React, { createContext, useContext, useReducer } from 'react';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'UPDATE_FIELD':
+    case 'UPDATE_FORM_FIELD':
+      const { obj, key, value } = action.payload;
       return {
-        ...state
+        ...state,
+        [obj]: {
+          ...state[obj],
+          [key]: value
+        }
       };
     case 'INCREMENT_STEP':
       return {
@@ -18,7 +23,7 @@ const reducer = (state, action) => {
 
 const initalState = {
   events: [],
-  step: 3,
+  step: 1,
   totalPrice: 0,
   gratuity: 0.18,
   pricePerPlate: 16.0,

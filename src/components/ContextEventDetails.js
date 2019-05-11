@@ -13,25 +13,29 @@ import {
   StepHeading
 } from 'elements';
 
-function EventDetailsForm({ addError, handleChange }) {
+function EventDetailsForm({ addError }) {
   const [state, dispatch] = useEvent(ComponentContext);
   const { errors, event, step } = state;
 
   const incrementStep = () => dispatch({ type: 'INCREMENT_STEP' });
+  const handleChange = input => e => {
+    let splitInput = input.split('.');
+    let currentObject;
+    if (splitInput[0] === 'event') {
+      currentObject = 'event';
+    }
 
-  //   const continueOn = () => {
-  //     let isValid = true;
-  //     for (let field in event) {
-  //       if (event[field].length === 0) {
-  //         addError(field);
-  //         isValid = false;
-  //       }
-  //     }
-
-  //     if (isValid) {
-  //       nextStep();
-  //     }
-  //   };
+    if (splitInput.length === 2) {
+      dispatch({
+        type: 'UPDATE_FIELD',
+        payload: {
+          obj: currentObject,
+          key: e.target.name,
+          value: e.target.value
+        }
+      });
+    }
+  };
 
   return (
     <FauxForm>
@@ -43,13 +47,13 @@ function EventDetailsForm({ addError, handleChange }) {
         <TextInput
           type="text"
           name="title"
-          //   id="title"
-          //   onChange={handleChange('event.title')}
-          //   defaultValue={event.title}
-          //   placeholder="Graduation Party"
-          //   isError={errors.title}
+          id="title"
+          onChange={handleChange('event.title')}
+          defaultValue={event.title}
+          placeholder="Graduation Party"
+          isError={errors.title}
         />
-        {/* // {errors.title ? <ErrorField>Field is required</ErrorField> : null} */}
+        {errors.title ? <ErrorField>Field is required</ErrorField> : null}
       </FormGroup>
       <button onClick={incrementStep}>{step}</button>
       {/* <FormGroup>
