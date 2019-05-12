@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEvent, ComponentContext } from '../context/event-context';
 import styled from 'styled-components';
 import {
   FauxForm,
@@ -9,19 +10,41 @@ import {
   DateInputGroup
 } from 'elements';
 
-function EventDetailsForm({
-  event,
-  handleChange,
-  user,
-  meats,
-  sides,
-  salads,
-  breads,
-  totalPrice,
-  jumpStep
-}) {
+function EventDetailsForm() {
+  const [state, dispatch] = useEvent(ComponentContext);
+  const {
+    errors,
+    event,
+    step,
+    user,
+    meats,
+    sides,
+    salads,
+    breads,
+    totalPrice
+  } = state;
+
+  const incrementStep = () => dispatch({ type: 'INCREMENT_STEP' });
+  const handleChange = input => e => {
+    let splitInput = input.split('.');
+    let currentObject;
+    if (splitInput[0] === 'event') {
+      currentObject = 'event';
+    }
+
+    if (splitInput.length === 2) {
+      dispatch({
+        type: 'UPDATE_FIELD',
+        payload: {
+          obj: currentObject,
+          key: e.target.name,
+          value: e.target.value
+        }
+      });
+    }
+  };
   const jumpSection = step => {
-    jumpStep(step);
+    // jumpStep(step);
   };
 
   return (

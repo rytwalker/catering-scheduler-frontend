@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEvent, ComponentContext } from '../context/event-context';
 import {
   FauxForm,
   FormGroup,
@@ -12,20 +13,42 @@ import {
   StepHeading
 } from 'elements';
 
-function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
-  const continueOn = () => {
-    let isValid = true;
-    for (let field in event) {
-      if (event[field].length === 0) {
-        addError(field);
-        isValid = false;
-      }
+function EventDetailsForm() {
+  const [state, dispatch] = useEvent(ComponentContext);
+  const { errors, event, step } = state;
+
+  const incrementStep = () => dispatch({ type: 'INCREMENT_STEP' });
+  const handleChange = input => e => {
+    let splitInput = input.split('.');
+    let currentObject;
+    if (splitInput[0] === 'event') {
+      currentObject = 'event';
     }
 
-    if (isValid) {
-      nextStep();
+    if (splitInput.length === 2) {
+      dispatch({
+        type: 'UPDATE_FIELD',
+        payload: {
+          obj: currentObject,
+          key: e.target.name,
+          value: e.target.value
+        }
+      });
     }
   };
+  // const continueOn = () => {
+  //   let isValid = true;
+  //   for (let field in event) {
+  //     if (event[field].length === 0) {
+  //       addError(field);
+  //       isValid = false;
+  //     }
+  //   }
+
+  //   if (isValid) {
+  //     nextStep();
+  //   }
+  // };
 
   return (
     <FauxForm>
@@ -169,7 +192,7 @@ function EventDetailsForm({ addError, errors, event, handleChange, nextStep }) {
         </FormGroup>
       </DateInputGroup>
       <ButtonGroup>
-        <FormButton onClick={continueOn}>Next</FormButton>
+        <FormButton onClick={incrementStep}>Next</FormButton>
       </ButtonGroup>
     </FauxForm>
   );

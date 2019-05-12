@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEvent, ComponentContext } from '../context/event-context';
 import {
   FauxForm,
   FormGroup,
@@ -9,27 +10,42 @@ import {
   FormButton
 } from 'elements';
 
-function EventContactForm({
-  addError,
-  errors,
-  handleChange,
-  nextStep,
-  prevStep,
-  user
-}) {
-  const continueOn = () => {
-    let isValid = true;
-    for (let field in user) {
-      if (user[field].length === 0) {
-        addError(field);
-        isValid = false;
-      }
+function EventContactForm() {
+  const [state, dispatch] = useEvent(ComponentContext);
+  const { errors, user, step } = state;
+
+  const incrementStep = () => dispatch({ type: 'INCREMENT_STEP' });
+  const handleChange = input => e => {
+    let splitInput = input.split('.');
+    let currentObject;
+    if (splitInput[0] === 'event') {
+      currentObject = 'event';
     }
 
-    if (isValid) {
-      nextStep();
+    if (splitInput.length === 2) {
+      dispatch({
+        type: 'UPDATE_FIELD',
+        payload: {
+          obj: currentObject,
+          key: e.target.name,
+          value: e.target.value
+        }
+      });
     }
   };
+  // const continueOn = () => {
+  //   let isValid = true;
+  //   for (let field in user) {
+  //     if (user[field].length === 0) {
+  //       addError(field);
+  //       isValid = false;
+  //     }
+  //   }
+
+  //   if (isValid) {
+  //     nextStep();
+  //   }
+  // };
   return (
     <FauxForm>
       <FormGroup>
@@ -87,8 +103,8 @@ function EventContactForm({
       </FormGroup>
 
       <ButtonGroupTwo>
-        <FormButton onClick={prevStep}>Back</FormButton>
-        <FormButton onClick={continueOn}>Next</FormButton>
+        <FormButton>Back</FormButton>
+        <FormButton>Next</FormButton>
       </ButtonGroupTwo>
     </FauxForm>
   );

@@ -11,10 +11,25 @@ const reducer = (state, action) => {
           [key]: value
         }
       };
+    case 'GET_EVENTS':
+      return {
+        ...state,
+        events: [...action.payload]
+      };
+    case 'SET_DATE':
+      return {
+        ...state,
+        event: { ...state.event, date: action.payload }
+      };
     case 'INCREMENT_STEP':
       return {
         ...state,
         step: (state.step += 1)
+      };
+    case 'DECREMENT_STEP':
+      return {
+        ...state,
+        step: (state.step -= 1)
       };
     default:
       return state;

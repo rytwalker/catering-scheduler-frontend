@@ -10,13 +10,11 @@ import MenuSidebar from '../components/MenuSidebar';
 import EventCalendar from '../components/EventCalendar';
 import EventContactForm from '../components/EventContactForm';
 import EventConfirmForm from '../components/EventConfirmForm';
-import events from '../data/events';
-const upcomingEvents = [...events];
 
 const Events = () => {
   const state = useEvent(ComponentContext);
   console.log(state);
-  const step = 4;
+  const step = state.step;
   // const { step } = ComponentContext;
   const CurrentComponent = () => {
     switch (step) {
