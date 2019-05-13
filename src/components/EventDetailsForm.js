@@ -15,7 +15,7 @@ import {
 
 function EventDetailsForm() {
   const [state, dispatch] = useEvent(ComponentContext);
-  const { errors, event, step } = state;
+  const { errors, event } = state;
 
   const incrementStep = () => dispatch({ type: 'INCREMENT_STEP' });
   const handleChange = input => e => {

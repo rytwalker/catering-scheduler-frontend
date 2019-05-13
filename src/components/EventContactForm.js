@@ -15,6 +15,7 @@ function EventContactForm() {
   const { errors, user, step } = state;
 
   const incrementStep = () => dispatch({ type: 'INCREMENT_STEP' });
+  const decrementStep = () => dispatch({ type: 'DECREMENT_STEP' });
   const handleChange = input => e => {
     let splitInput = input.split('.');
     let currentObject;
@@ -103,8 +104,8 @@ function EventContactForm() {
       </FormGroup>
 
       <ButtonGroupTwo>
-        <FormButton>Back</FormButton>
-        <FormButton>Next</FormButton>
+        <FormButton onClick={decrementStep}>Back</FormButton>
+        <FormButton onClick={incrementStep}>Next</FormButton>
       </ButtonGroupTwo>
     </FauxForm>
   );

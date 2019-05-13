@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
+import { EventProvider } from './context/event-context';
 import AuthPage from './pages/Auth';
 import Bookings from './pages/Bookings';
 import EventsPage from './pages/Events';
@@ -32,21 +33,27 @@ class App extends Component {
             logout: this.logout
           }}
         >
-          <Navigation />
-          <main style={{ margin: '8rem auto 0', maxWidth: '1020px' }}>
-            <Switch>
-              {this.state.token && <Redirect path="/" to="/calendar" exact />}
-              {this.state.token && (
-                <Redirect path="/auth" to="/calendar" exact />
-              )}
-              {!this.state.token && <Route path="/auth" component={AuthPage} />}
-              <Route path="/calendar" component={EventsPage} />
-              <Route path="/context" component={EventContext} />
-              {this.state.token && <Route path="/book" component={Bookings} />}
-              {!this.state.token && <Redirect to="/auth" exact />}
-            </Switch>
-          </main>
-          <Footer>Footrer</Footer>
+          <EventProvider>
+            <Navigation />
+            <main style={{ margin: '8rem auto 0', maxWidth: '1020px' }}>
+              <Switch>
+                {this.state.token && <Redirect path="/" to="/calendar" exact />}
+                {this.state.token && (
+                  <Redirect path="/auth" to="/calendar" exact />
+                )}
+                {!this.state.token && (
+                  <Route path="/auth" component={AuthPage} />
+                )}
+                <Route path="/calendar" component={EventsPage} />
+                <Route path="/context" component={EventContext} />
+                {this.state.token && (
+                  <Route path="/book" component={Bookings} />
+                )}
+                {!this.state.token && <Redirect to="/auth" exact />}
+              </Switch>
+            </main>
+            <Footer>Footrer</Footer>
+          </EventProvider>
         </AuthContext.Provider>
       </>
     );

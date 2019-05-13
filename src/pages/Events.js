@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  EventProvider,
-  ComponentContext,
-  useEvent
-} from '../context/event-context';
+import { ComponentContext, useEvent } from '../context/event-context';
 import styled from 'styled-components';
 import Menu from '../components/Menu';
 import MenuSidebar from '../components/MenuSidebar';
@@ -12,60 +8,52 @@ import EventContactForm from '../components/EventContactForm';
 import EventConfirmForm from '../components/EventConfirmForm';
 
 const Events = () => {
-  const state = useEvent(ComponentContext);
-  console.log(state);
-  const step = state.step;
-  // const { step } = ComponentContext;
-  const CurrentComponent = () => {
-    switch (step) {
-      case 1:
-        return (
-          <>
-            <StepHeading>
-              Step 1: <span>Select A date</span>
-            </StepHeading>
-            <EventCalendar />
-          </>
-        );
-      case 2:
-        return (
-          <>
-            <StepHeading>
-              Step 2: <span>Tell us about you</span>
-            </StepHeading>
-            <EventContactForm />
-          </>
-        );
-      case 3:
-        return (
-          <>
-            <StepHeading>
-              Step 3: <span>Create your menu</span>
-            </StepHeading>
-            <MenuContainer>
-              <Menu />
-              <MenuSidebar />
-            </MenuContainer>
-          </>
-        );
-      case 4:
-        return (
-          <>
-            <StepHeading>
-              Step 4: <span>Confirm Your Event Details</span>
-            </StepHeading>
-            <EventConfirmForm />
-          </>
-        );
-      default:
-        break;
-    }
-  };
-  return (
-    <EventProvider>
-      <CurrentComponent />
-    </EventProvider>
-  );
+  const [state, dispatch] = useEvent(ComponentContext);
+  const { step } = state;
+
+  switch (step) {
+    case 1:
+      return (
+        <>
+          <StepHeading>
+            Step 1: <span>Select A date</span>
+          </StepHeading>
+          <EventCalendar />
+        </>
+      );
+    case 2:
+      return (
+        <>
+          <StepHeading>
+            Step 2: <span>Tell us about you</span>
+          </StepHeading>
+          <EventContactForm />
+        </>
+      );
+    case 3:
+      return (
+        <>
+          <StepHeading>
+            Step 3: <span>Create your menu</span>
+          </StepHeading>
+          <MenuContainer>
+            <Menu />
+            <MenuSidebar />
+          </MenuContainer>
+        </>
+      );
+    case 4:
+      return (
+        <>
+          <StepHeading>
+            Step 4: <span>Confirm Your Event Details</span>
+          </StepHeading>
+          <EventConfirmForm />
+        </>
+      );
+    default:
+      break;
+  }
 };
 
 const MenuContainer = styled.div`
@@ -86,6 +74,7 @@ const StepHeading = styled.h2`
 `;
 
 export default Events;
+
 // import React, { Component } from 'react';
 // import styled from 'styled-components';
 // import Menu from '../components/Menu';
@@ -133,16 +122,6 @@ export default Events;
 //     this.populateCalendar();
 //   }
 
-//   populateCalendar = () => {
-//     let events = upcomingEvents.map(event => ({
-//       start: new Date(event.date + 'T' + event.start_time + 'Z'),
-//       end: new Date(event.date + 'T' + event.end_time + 'Z'),
-//       title: event.title,
-//       allDay: event.guests > 200 ? true : false
-//     }));
-//     this.setState({ events: [...events] });
-//   };
-
 //   addError = field => {
 //     this.setState(prevState => {
 //       return { errors: { ...prevState.errors, [field]: true } };
@@ -173,9 +152,6 @@ export default Events;
 //       this.setState({ [splitInput[0]]: e.target.value });
 //     }
 //   };
-
-//   setDate = date =>
-//     this.setState({ event: { ...this.state.event, date: date } });
 
 //   nextStep = () => {
 //     let { step } = this.state;

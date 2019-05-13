@@ -7,26 +7,17 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './EventCalendar.css';
 import Modal from './Modal';
 import EventDetailsForm from './EventDetailsForm';
-import events from '../data/events';
-const upcomingEvents = [...events];
+import eventsData from '../data/events';
+const upcomingEvents = [...eventsData];
 
 const localizer = Calendar.momentLocalizer(moment);
 
-function EventCalendar(
-  {
-    // addError,
-    // errors,
-    // event,
-    // events,
-    // nextStep,
-    // handleChange,
-    // setDate
-  }
-) {
+function EventCalendar() {
   const [toggle, setToggle] = useState(false);
   const [state, dispatch] = useEvent(ComponentContext);
+  const { events } = state;
   useEffect(() => {
-    dispatch({ type: 'GET_EVENTS', payload: upcomingEvents });
+    populateCalendar();
     // let isFormValid = true;
     // for (let field in event) {
     //   if (event[field].length === 0) {
@@ -38,6 +29,16 @@ function EventCalendar(
     //   setToggle(true);
     // }
   }, []);
+
+  const populateCalendar = () => {
+    let events = upcomingEvents.map(event => ({
+      start: new Date(event.date + 'T' + event.start_time + 'Z'),
+      end: new Date(event.date + 'T' + event.end_time + 'Z'),
+      title: event.title,
+      allDay: event.guests > 200 ? true : false
+    }));
+    dispatch({ type: 'GET_EVENTS', payload: events });
+  };
 
   const setDate = date => dispatch({ type: 'SET_DATE', payload: date });
 
