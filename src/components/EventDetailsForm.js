@@ -34,21 +34,25 @@ function EventDetailsForm() {
           value: e.target.value
         }
       });
+      dispatch({ type: 'REMOVE_ERROR', payload: splitInput[1] });
     }
   };
-  // const continueOn = () => {
-  //   let isValid = true;
-  //   for (let field in event) {
-  //     if (event[field].length === 0) {
-  //       addError(field);
-  //       isValid = false;
-  //     }
-  //   }
+  const addError = field => {
+    dispatch({ type: 'ADD_ERROR', payload: field });
+  };
+  const continueOn = () => {
+    let isValid = true;
+    for (let field in event) {
+      if (event[field].length === 0) {
+        addError(field);
+        isValid = false;
+      }
+    }
 
-  //   if (isValid) {
-  //     nextStep();
-  //   }
-  // };
+    if (isValid) {
+      incrementStep();
+    }
+  };
 
   return (
     <FauxForm>
@@ -192,7 +196,7 @@ function EventDetailsForm() {
         </FormGroup>
       </DateInputGroup>
       <ButtonGroup>
-        <FormButton onClick={incrementStep}>Next</FormButton>
+        <FormButton onClick={continueOn}>Next</FormButton>
       </ButtonGroup>
     </FauxForm>
   );

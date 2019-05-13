@@ -31,6 +31,16 @@ const reducer = (state, action) => {
         ...state,
         step: (state.step -= 1)
       };
+    case 'ADD_ERROR':
+      return {
+        ...state,
+        errors: { ...state.errors, [action.payload]: true }
+      };
+    case 'REMOVE_ERROR':
+      return {
+        ...state,
+        errors: { ...state.errors, [action.payload]: false }
+      };
     default:
       return state;
   }
